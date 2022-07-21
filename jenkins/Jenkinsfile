@@ -10,26 +10,26 @@ pipeline {
                 sh 'go build main.go'
                 sh 'ls'
             }
-        }
-         post {
-            success {
-                echo 'build 성공~'
+            post {
+                success {
+                    echo 'build 성공~'
                 }
-            failure {
-                echo 'build 실패...'
+                failure {
+                    echo 'build 실패...'
+                }
             }
-         }
+        }
         stage('Execute') {
             steps {
                 sh './main'
             }
-        }
-        post {
-            success {
-                echo 'build 성공~'
-            }
-            failure {
-                echo 'build 실패...'
+            post {
+                success {
+                    echo 'build 성공~'
+                }
+                failure {
+                    echo 'build 실패...'
+                }
             }
         }
     }
