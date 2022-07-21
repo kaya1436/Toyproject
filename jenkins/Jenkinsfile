@@ -1,21 +1,35 @@
 pipeline {
     agent any
-
+    tools {
+        go "Go 1.18"
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'pwd'
+                sh 'go build main.go'
+                sh 'ls'
             }
         }
-        stage('Test') {
+         post {
+            success {
+                echo 'build 성공~'
+                }
+            failure {
+                echo 'build 실패...'
+            }
+         }
+        stage('Execute') {
             steps {
-                echo 'Testing..'
-
+                sh './main'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        post {
+            success {
+                echo 'build 성공~'
+            }
+            failure {
+                echo 'build 실패...'
             }
         }
     }
