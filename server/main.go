@@ -15,7 +15,7 @@ var (
 
 func main() {
 	rd = render.New(render.Options{
-		Directory:  "webapp",
+		Directory:  "web-app/public",
 		Extensions: []string{".html", ".tmpl"},
 	})
 	mux := WebHandler()
