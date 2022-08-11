@@ -1,6 +1,7 @@
 version: "3.7"
 services:
   react:
+    container_name: react_docker
     build:
       context: .
       dockerfile: Dockerfile
