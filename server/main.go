@@ -15,7 +15,7 @@ var (
 
 func main() {
 	rd = render.New(render.Options{
-		Directory:  "web-app/public",
+		Directory:  "Toyproject/web-app/public", //경로 재설정 필요
 		Extensions: []string{".html", ".tmpl"},
 	})
 	mux := WebHandler()
@@ -24,7 +24,7 @@ func main() {
 	n.UseHandler(mux)
 
 	log.Println("Started App")
-	err := http.ListenAndServe(":3000", n)
+	err := http.ListenAndServe(":8080", n)
 	if err != nil {
 		panic(err)
 	}
