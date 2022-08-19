@@ -60,8 +60,8 @@ function Home() {
   `;
 
   const { t, i18n } = useTranslation();
-  const changeLang = (e) => {
-    i18n.changeLanguage(e.target.value);
+  const changeLang = (value) => {
+    i18n.changeLanguage(value);
   };
 
   const { Option } = Select;
@@ -72,13 +72,13 @@ function Home() {
           <Header>
             <img src={logo} />
             <Select
-              defaultValue="en"
+              defaultValue="ko"
               bordered={false}
               style={{ width: "100px" }}
               onChange={changeLang}
             >
-              <Option value="en">영어</Option>
-              <Option value="ko">한국어</Option>
+              <Option value="en">{t("en")}</Option>
+              <Option value="ko">{t("ko")}</Option>
             </Select>
           </Header>
           <Title>
