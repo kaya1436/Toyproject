@@ -5,6 +5,7 @@ import styled from "styled-components";
 import backImg from "../assets/img/img_intro_bg.webp";
 import logo from "../assets/img/logo_hyundai.svg";
 import logo_e from "../assets/img/logo_emobility.webp";
+import { useTranslation } from "react-i18next";
 
 function Home() {
   const Container = styled.div`
@@ -57,6 +58,12 @@ function Home() {
     font-size: 28px;
     letter-spacing: -0.5px;
   `;
+
+  const { t, i18n } = useTranslation();
+  const changeLang = (e) => {
+    i18n.changeLanguage(e.target.value);
+  };
+
   const { Option } = Select;
   return (
     <>
@@ -68,6 +75,7 @@ function Home() {
               defaultValue="en"
               bordered={false}
               style={{ width: "100px" }}
+              onChange={changeLang}
             >
               <Option value="en">영어</Option>
               <Option value="ko">한국어</Option>
@@ -79,7 +87,7 @@ function Home() {
           </Title>
           <div>
             <Link to="/login">
-              <Button>시작하기</Button>
+              <Button>{t("start")}</Button>
             </Link>
           </div>
         </Box>

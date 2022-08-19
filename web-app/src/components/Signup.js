@@ -5,7 +5,9 @@ function Signup() {
     <>
       <img src={logo_e} />
       <h2>가입 정보 입력</h2>
-      이름, 휴대폰번호,생년월일
+      이름
+      <input placeholder="이름" />
+      휴대폰번호 생년월일
     </>
   );
 }
