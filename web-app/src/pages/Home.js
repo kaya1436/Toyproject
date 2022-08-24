@@ -39,20 +39,6 @@ function Home() {
   const Title = styled.div`
     height: 200px;
   `;
-  const Button = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 100%;
-    height: 54px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #ffffff;
-    background: #002c5f;
-    border: 0;
-    outline: none;
-  `;
   const P = styled.div`
     color: rgb(37, 172, 204);
     font-size: 28px;
@@ -72,13 +58,13 @@ function Home() {
           <Header>
             <img src={logo} />
             <Select
-              defaultValue="ko"
+              defaultValue={t("ko")}
               bordered={false}
               style={{ width: "100px" }}
               onChange={changeLang}
             >
-              <Option value="en">{t("en")}</Option>
               <Option value="ko">{t("ko")}</Option>
+              <Option value="en">{t("en")}</Option>
             </Select>
           </Header>
           <Title>
@@ -87,7 +73,7 @@ function Home() {
           </Title>
           <div>
             <Link to="/login">
-              <Button>{t("start")}</Button>
+              <button>{t("start")}</button>
             </Link>
           </div>
         </Box>
