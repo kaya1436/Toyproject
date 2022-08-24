@@ -22,7 +22,15 @@ function Register() {
     }
   }, [image]);
 
-  const signUp = async () => {
+  const imgHandler = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    } else {
+      setImage(null);
+    }
+  };
+
+  const signUp = async (e) => {
     const formData = new FormData();
     formData.append("file", image);
     formData.append("name", name);
@@ -63,14 +71,7 @@ function Register() {
             style={{ display: "none" }}
             ref={fileInputRef}
             accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files[0];
-              if (file && file.type.substring(0, 5) === "image") {
-                setImage(file);
-              } else {
-                setImage(null);
-              }
-            }}
+            onChange={imgHandler}
           />
           <label htmlFor="name">
             이름 *
