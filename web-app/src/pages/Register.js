@@ -22,16 +22,16 @@ function Register() {
     }
   }, [image]);
 
-  const user = {
-    name: name,
-    birth_date: birth,
-    my_image: image,
-  };
   const signUp = async () => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("name", name);
+    formData.append("birth_data", birth);
+
     try {
-      await axios.post("https://jsonplaceholder.typicode.com/posts", user);
+      await axios.post("https://jsonplaceholder.typicode.com/posts", formData);
     } catch (error) {
-      console.log("Error>>", error);
+      console.log(error);
     }
   };
   return (
