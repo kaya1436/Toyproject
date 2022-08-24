@@ -1,6 +1,6 @@
 import logo_e from "../assets/img/logo_emobility.webp";
 import "../css/signup.css";
-import Profile from "./Profile";
+import Profile from "../components/Profile";
 
 function Signup() {
   return (
