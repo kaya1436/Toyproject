@@ -30,9 +30,9 @@ function Register() {
     }
   };
 
-  const signUp = async (e) => {
+  const signUp = async () => {
     const formData = new FormData();
-    formData.append("file", image);
+    formData.append("my_image", image);
     formData.append("name", name);
     formData.append("birth_data", birth);
 
