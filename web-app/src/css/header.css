@@ -9,6 +9,7 @@ header {
   align-items: center;
   color: #fff;
   font-size: 15px;
+  min-width: 1260px;
 }
 .header-logo {
   margin: 0px 10px;
@@ -20,9 +21,9 @@ header {
   flex-wrap: wrap;
   list-style: none;
   margin-bottom: 0px;
-  padding-left: 0px;
-  width: 60vw;
-  justify-content: space-around;
+  padding: 0px 16px;
+  width: 65vw;
+  justify-content: flex-end;
 }
 .menu-items {
   position: relative;
@@ -31,11 +32,16 @@ header {
   display: block;
   color: black;
   padding: 0.7rem 1rem;
+  text-decoration: none;
 }
 .menu-items button {
+  display: flex;
+  align-items: center;
   border: none;
   background-color: transparent;
   cursor: pointer;
+  width: 100%;
+  margin: 0px 10px;
 }
 button span {
   margin-left: 3px;
@@ -44,13 +50,16 @@ button span {
 .menu-items a:hover {
   color: rgb(37, 172, 204);
 }
+
 .right-arrow::after {
-  color: black;
   content: "";
   display: inline-block;
+  color: black;
   border-left: 0.42em solid;
   border-top: 0.32em solid transparent;
   border-bottom: 0.32em solid transparent;
+  margin-right: 10px;
+  margin-left: 3.5em;
 }
 .arrow::after {
   content: "";
@@ -73,15 +82,19 @@ button span {
   list-style: none;
   background-color: #fff;
   border-radius: 0.5rem;
-  /* display: none; */
+  display: none;
 }
 .dropdown.show {
   display: block;
 }
-
 .dropdown .dropdown-submenu {
-  left: 90%;
-  top: 10px;
+  left: 100%;
+  top: -7px;
+}
+.header-info {
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
 }
 
 /* content */

@@ -40,7 +40,7 @@ function MenuItems({ items, depthLevel }) {
       onMouseLeave={onMouseLeave}
       onClick={closeDropdown}
     >
-      {items.path && items.submenu ? (
+      {items.url && items.submenu ? (
         <>
           <button
             type="button"
@@ -51,7 +51,7 @@ function MenuItems({ items, depthLevel }) {
             {depthLevel === 0 ? (
               items.title
             ) : (
-              <Link to={items.path}>{items.title}</Link>
+              <Link to={items.url}>{items.title}</Link>
             )}
             {depthLevel > 0 ? (
               <span className="right-arrow" />
@@ -65,7 +65,7 @@ function MenuItems({ items, depthLevel }) {
             dropdown={dropdown}
           />
         </>
-      ) : !items.path && items.submenu ? (
+      ) : !items.url && items.submenu ? (
         <>
           <button
             type="button"
@@ -83,7 +83,7 @@ function MenuItems({ items, depthLevel }) {
           />
         </>
       ) : (
-        <Link to={items.path}>{items.title}</Link>
+        <Link to={items.url}>{items.title}</Link>
       )}
     </li>
   );

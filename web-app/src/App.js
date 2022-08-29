@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Vehicle from "./pages/Vehicle";
 import Layout from "./components/Layout";
+import VehicleModel from "./pages/VehicleModel";
+import Product from "./pages/Product";
+import SubscriptionUser from "./pages/SubscriptionUser";
 
 function App() {
   return (
@@ -11,8 +14,11 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Register />} />
-      <Route path="/vehicle" element={<Layout />}>
-        <Route index element={<Vehicle />} />
+      <Route path="/" element={<Layout />}>
+        <Route path="/vehicle" element={<Vehicle />} />
+        <Route path="/vehicleModel" element={<VehicleModel />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/subscriptionUser" element={<SubscriptionUser />} />
       </Route>
     </Routes>
   );
