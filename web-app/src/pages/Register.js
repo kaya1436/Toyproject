@@ -37,7 +37,7 @@ function Register() {
     formData.append("birth_data", birth);
 
     try {
-      await axios.post("https://jsonplaceholder.typicode.com/posts", formData);
+      await axios.post("api주소", formData);
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +97,7 @@ function Register() {
               required
             />
           </label>
-          <button>회원가입</button>
+          <button className="go-to">회원가입</button>
         </form>
       </div>
     </>

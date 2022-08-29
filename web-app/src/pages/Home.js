@@ -73,7 +73,7 @@ function Home() {
           </Title>
           <div>
             <Link to="/login">
-              <button>{t("start")}</button>
+              <button className="go-to">{t("start")}</button>
             </Link>
           </div>
         </Box>

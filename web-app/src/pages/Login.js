@@ -6,7 +6,9 @@ function Login() {
     <>
       <div className="box">
         <img src={logo_e} style={{ width: "300px" }} />
-        <button>google login</button>
+        <Link to="/vehicle">
+          <button className="go-to">google login</button>
+        </Link>
         <Link to="/signup">회원가입</Link>
       </div>
     </>

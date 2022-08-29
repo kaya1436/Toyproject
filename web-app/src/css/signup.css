@@ -1,6 +1,7 @@
-body,
-html {
+html,
+body {
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +25,7 @@ form {
   justify-content: space-between;
   padding: 10px 0;
 }
-button {
+.go-to {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +47,7 @@ button {
   border-radius: 50%;
   background-size: cover;
   margin: 0 auto;
+  border: none;
 }
 .profileImg {
   height: 100px;
