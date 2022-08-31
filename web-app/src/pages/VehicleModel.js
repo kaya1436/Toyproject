@@ -1,4 +1,4 @@
 function VehicleModel() {
-  return <>vehicle model</>;
+  return <>vehicleModel</>;
 }
 export default VehicleModel;

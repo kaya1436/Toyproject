@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Login() {
   return (
-    <>
+    <div className="login-bg">
       <div className="box">
         <img src={logo_e} style={{ width: "300px" }} />
         <Link to="/vehicle">
@@ -11,7 +11,7 @@ function Login() {
         </Link>
         <Link to="/signup">회원가입</Link>
       </div>
-    </>
+    </div>
   );
 }
 export default Login;

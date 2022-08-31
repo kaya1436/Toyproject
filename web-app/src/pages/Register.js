@@ -43,14 +43,14 @@ function Register() {
     }
   };
   return (
-    <>
+    <div className="login-bg">
       <div className="box">
         <img src={logo_e} style={{ width: "350px" }} />
         <h2>가입 정보를 입력해주세요.</h2>
-        <form onSubmit={signUp}>
+        <form onSubmit={signUp} className="signup-form">
           {preview ? (
             <img
-              className="profileImg"
+              className="profile-img"
               src={preview}
               onClick={(e) => {
                 e.preventDefault();
@@ -59,7 +59,7 @@ function Register() {
             />
           ) : (
             <button
-              className="imageBtn"
+              className="image-btn"
               onClick={(e) => {
                 e.preventDefault();
                 fileInputRef.current.click();
@@ -76,6 +76,7 @@ function Register() {
           <label htmlFor="name">
             이름 *
             <input
+              className="info-input"
               type="text"
               name="name"
               value={name}
@@ -87,6 +88,7 @@ function Register() {
           <label htmlFor="date">
             생년월일 *
             <input
+              className="info-input"
               type="date"
               name="date"
               min="1990-01-01"
@@ -100,7 +102,7 @@ function Register() {
           <button className="go-to">회원가입</button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 export default Register;
