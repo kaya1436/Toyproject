@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__ic_basic_thumbnail" width="42" height="42" viewBox="0 0 42 42">
+    <defs>
+        <style>
+            .prefix__cls-2{fill:none;stroke:#898989;stroke-miterlimit:10;stroke-width:2px}
+        </style>
+    </defs>
+    <g id="prefix__ic_basic_thumbnail-2" data-name="ic_basic_thumbnail">
+        <path id="prefix__사각형_15849" d="M0 0H42V42H0z" data-name="사각형 15849" style="fill:#c2cbe5;opacity:0"/>
+        <g id="prefix__ic_basic_thumbnail-3" data-name="ic_basic_thumbnail" transform="translate(2 2)">
+            <path id="prefix__패스_2182" d="M1263.2 4877.926a1.473 1.473 0 0 1-1.473 1.474h-35.053a1.473 1.473 0 0 1-1.473-1.474v-35.054a1.471 1.471 0 0 1 1.473-1.472h35.053a1.472 1.472 0 0 1 1.473 1.472z" class="prefix__cls-2" data-name="패스 2182" transform="translate(-1225.2 -4841.4)"/>
+            <path id="prefix__패스_2183" d="M1242.655 4856.378a3.957 3.957 0 0 1-3.878 3.955 3.916 3.916 0 1 1 3.878-3.955z" class="prefix__cls-2" data-name="패스 2183" transform="translate(-1227.378 -4843.892)"/>
+            <path id="prefix__패스_2184" d="M1235.7 4884.415l15.09-15.03 4.142-4.125a1.873 1.873 0 0 1 2.327-.155l8.143 6.592" class="prefix__cls-2" data-name="패스 2184" transform="translate(-1227.557 -4846.648)"/>
+            <g id="prefix__그룹_618" data-name="그룹 618" transform="translate(.078 22.626)">
+                <path id="prefix__패스_2185" d="M1225.3 4878.583l8.763-7.6a1.863 1.863 0 0 1 2.327 0l6.359 5.505" class="prefix__cls-2" data-name="패스 2185" transform="translate(-1225.3 -4870.575)"/>
+            </g>
+        </g>
+    </g>
+</svg>

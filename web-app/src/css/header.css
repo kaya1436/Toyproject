@@ -10,6 +10,7 @@ header {
   color: #fff;
   font-size: 15px;
   min-width: 1260px;
+  z-index: 100;
 }
 .header-logo {
   margin: 0px 10px;

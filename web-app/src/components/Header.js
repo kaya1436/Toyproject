@@ -7,7 +7,7 @@ function Header() {
     <header>
       <div className="header-logo">
         <Link to="/vehicle">
-          <img src={logo_w} style={{ width: "130px" }} />
+          <img src={logo_w} style={{ width: "150px" }} />
         </Link>
       </div>
       <Navbar />

@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import VehicleModel from "./pages/VehicleModel";
 import Product from "./pages/Product";
 import SubscriptionUser from "./pages/SubscriptionUser";
+import VehicleCreate from "./pages/VehicleCreate";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="/vehicle" element={<Vehicle />} />
         <Route path="/vehicleModel" element={<VehicleModel />} />
+        <Route path="/vehicle/create" element={<VehicleCreate />} />
         <Route path="/product" element={<Product />} />
         <Route path="/subscriptionUser" element={<SubscriptionUser />} />
       </Route>
