@@ -102,6 +102,9 @@ export const Input = styled.input`
     background-color: rgb(238, 238, 238);
     color: rgb(119, 128, 139);
   }
+  &:hover {
+    box-shadow: rgb(109 110 131 / 30%) 0px 0px 3px 0px;
+  }
 `;
 
 export const TableDivLeft = styled.td`
@@ -121,6 +124,8 @@ export const selectStyles = {
     border: "1px solid rgb(191, 191, 191)",
     borderRadius: "4px",
     backgroundColor: "rgb(255, 255, 255)",
+    cursor: "pointer",
+    "&:hover": { boxShadow: "rgb(109 110 131 / 30%) 0px 0px 3px 0px" },
   }),
   dropdownIndicator: (provided) => ({
     ...provided,
@@ -139,6 +144,13 @@ export const selectStyles = {
     ...provided,
     color: "rgb(132, 140, 165)",
     "&:hover": { backgroundColor: "rgb(240, 240, 240)", color: "rgb(0,0,0)" },
+  }),
+  option: (provided, { isSelected }) => ({
+    ...provided,
+    cursor: "pointer",
+    backgroundColor: isSelected ? "rgb(240, 240, 240)" : null,
+    color: isSelected ? "rgb(0,0,0)" : null,
+    "&:hover": { backgroundColor: "rgb(240, 240, 240)" },
   }),
 };
 

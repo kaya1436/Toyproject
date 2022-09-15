@@ -1,58 +1,132 @@
-import { useEffect, useMemo, useState } from "react";
-import TotalTable from "../TotalTable";
-import axios from "axios";
+import { useMemo } from "react";
+import { useFilters, usePagination, useRowSelect, useTable } from "react-table";
+import { Checkbox } from "./Checkbox";
+import { COLUMNS } from "./columns";
+import { GlobalFilter, PageFilter } from "./TableFilter";
+import {
+  ColumnFilter,
+  FilterDiv,
+  Page,
+  PageDiv,
+  Table,
+  TableTop,
+  TbodyTr,
+  Thead,
+  TheadTr,
+} from "./tableStyle";
+import Pagination from "./Paginatioin";
 
-const Genres = ({ values }) => {
+function BasicTable(props) {
+  const columns = useMemo(() => COLUMNS, []);
+  const data = useMemo(() => props.data, [props.data]);
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    state,
+    page,
+    gotoPage,
+    setPageSize,
+    setFilter,
+    rows,
+    selectedFlatRows,
+  } = useTable(
+    { columns, data, initialState: { pageIndex: 0, pageSize: 10 } },
+    useFilters,
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => [
+        {
+          id: "selection",
+          Header: ({ getToggleAllRowsSelectedProps }) => (
+            <Checkbox {...getToggleAllRowsSelectedProps()} />
+          ),
+          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
+        },
+        ...columns,
+      ]);
+    }
+  );
+
+  const { globalFilter, pageSize } = state;
+
   return (
     <>
-      {values.map((genre, idx) => {
-        return (
-          <span key={idx} className="badge">
-            {genre}
+      <TableTop>
+        <div>
+          <span style={{ color: "rgb(137,137,137)", marginRight: "2px" }}>
+            Total
           </span>
-        );
-      })}
+          <span
+            style={{
+              fontWeight: "bold",
+              textDecoration: "underline",
+            }}
+          >
+            {rows.length}
+          </span>
+        </div>
+        <FilterDiv>
+          <Page>
+            <PageFilter filter={pageSize} setPageSize={setPageSize} />
+          </Page>
+          <ColumnFilter>
+            <GlobalFilter filter={globalFilter} setFilter={setFilter} />
+          </ColumnFilter>
+        </FilterDiv>
+      </TableTop>
+      <Table {...getTableProps()}>
+        <Thead>
+          {headerGroups.map((headerGroup) => (
+            <TheadTr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              ))}
+            </TheadTr>
+          ))}
+        </Thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((row) => {
+            prepareRow(row);
+            return (
+              <TbodyTr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </TbodyTr>
+            );
+          })}
+        </tbody>
+      </Table>
+      <PageDiv>
+        <Pagination
+          gotoPage={gotoPage}
+          length={rows.length}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+        />
+      </PageDiv>
+
+      <pre>
+        <code>
+          {JSON.stringify(
+            {
+              selectedFlatRows: selectedFlatRows.map(
+                (row) => row.original.name
+              ),
+            },
+            null,
+            2
+          )}
+        </code>
+      </pre>
     </>
   );
-};
-function BasicTable() {
-  const columns = useMemo(() => [
-    {
-      Header: "번호",
-      accessor: "name",
-    },
-    {
-      Header: "VIN No.",
-      accessor: "nativeName",
-    },
-    {
-      Header: "차량번호",
-      accessor: "capital",
-    },
-    {
-      Header: "E-mobility 요금제",
-      Cell: (props) => <img src={props.row.original.flag} width={50} />,
-    },
-    {
-      Header: "가입일",
-      accessor: "region",
-    },
-    {
-      Header: "종료일",
-      accessor: "population",
-    },
-    {
-      Header: "현재위치",
-      accessor: "languages.name",
-    },
-  ]);
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const result = await axios("https://restcountries.com/v2/all");
-      setData(result.data);
-    })();
-  }, []);
-  return <TotalTable columns={columns} data={data} />;
 }
+
 export default BasicTable;

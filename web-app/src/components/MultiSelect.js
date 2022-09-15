@@ -58,6 +58,7 @@ export const MultiSelect = (props) => {
       styles={selectStyles}
       placeholder="전체선택"
       isClearable={false}
+      components={{ IndicatorSeparator: null }}
     />
   );
 };

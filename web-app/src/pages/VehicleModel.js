@@ -33,6 +33,7 @@ function VehicleModel() {
     e.preventDefault();
     console.log(JSON.stringify(defaultValues));
   };
+
   return (
     <ContentBox>
       <Form autoComplete="off" onSubmit={onSubmit}>

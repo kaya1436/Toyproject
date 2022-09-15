@@ -1,4 +1,4 @@
-import { menuItems } from "../menuItems";
+import { menuItems } from "../../menuItems";
 import MenuItems from "./MenuItems";
 function Navbar() {
   return (

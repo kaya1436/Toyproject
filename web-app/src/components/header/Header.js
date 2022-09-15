@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo_w from "../assets/img/logo_w.png";
+import logo_w from "../../assets/img/logo_w.png";
 import Navbar from "./Navbar";
 
 function Header() {

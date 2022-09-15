@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MultiSelect } from "../components/MultiSelect";
 import BasicTable from "../components/table/BasicTable";
@@ -17,6 +17,7 @@ import {
   TableDivLeft,
   TableDivRight,
 } from "../components/TableStyle";
+import axios from "axios";
 
 function Vehicle() {
   const [vin, setVin] = useState("");
@@ -46,7 +47,14 @@ function Vehicle() {
     e.preventDefault();
     console.log(JSON.stringify(defaultValues));
   };
-
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    const response = await axios.get("https://restcountries.com/v2/all");
+    setData(response.data);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <ContentBox>
       <div>
@@ -127,11 +135,7 @@ function Vehicle() {
         </Form>
       </div>
       <div>
-        <form>
-          <div>
-            <BasicTable />
-          </div>
-        </form>
+        <BasicTable data={data} />
       </div>
     </ContentBox>
   );
