@@ -18,6 +18,8 @@ import {
   TableDivRight,
 } from "../components/TableStyle";
 import axios from "axios";
+import { vehicleListColumns } from "../components/table/columns";
+import { t } from "i18next";
 
 function Vehicle() {
   const [vin, setVin] = useState("");
@@ -59,24 +61,24 @@ function Vehicle() {
     <ContentBox>
       <div>
         <Form onSubmit={onSubmit} autoComplete="off">
-          <ContentTitle>차량정보</ContentTitle>
+          <ContentTitle>{t("Vehicle Info.")}</ContentTitle>
           <Link to="/vehicle/create">
-            <ColorButton>등록</ColorButton>
+            <ColorButton>{t("Register")}</ColorButton>
           </Link>
-          <FormButton>일괄등록</FormButton>
-          <FormButton>내려받기</FormButton>
-          <FormButton>삭제</FormButton>
-          <FormButton>포맷 다운로드</FormButton>
+          <FormButton>{t("Upload All")}</FormButton>
+          <FormButton>{t("Download")}</FormButton>
+          <FormButton>{t("Delete")}</FormButton>
+          <FormButton>{t("Format Download")}</FormButton>
           <SearchBox>
             <SearchTable>
               <tbody>
                 <tr>
                   <LabelTd>
-                    <Label htmlFor="vin">VIN No.</Label>
+                    <Label htmlFor="vin">{t("VIN No.")}</Label>
                   </LabelTd>
                   <SearchTd>
                     <Input
-                      placeholder="내용을 입력하세요."
+                      placeholder={t("Enter details")}
                       value={vin}
                       onChange={(e) => setVin(e.target.value)}
                     ></Input>
@@ -84,11 +86,13 @@ function Vehicle() {
                   <TableDivLeft rowSpan="2" />
                   <TableDivRight rowSpan="2" />
                   <LabelTd>
-                    <Label htmlFor="license_plate_number">차량번호</Label>
+                    <Label htmlFor="license_plate_number">
+                      {t("Vehicle No.")}
+                    </Label>
                   </LabelTd>
                   <SearchTd>
                     <Input
-                      placeholder="내용을 입력하세요."
+                      placeholder={t("Enter details")}
                       value={number}
                       onChange={(e) => setNumber(e.target.value)}
                     ></Input>
@@ -96,17 +100,19 @@ function Vehicle() {
                 </tr>
                 <tr>
                   <LabelTd>
-                    <Label htmlFor="계약자명">계약자명</Label>
+                    <Label htmlFor="계약자명">{t("Contractor Name")}</Label>
                   </LabelTd>
                   <SearchTd>
                     <Input
-                      placeholder="내용을 입력하세요."
+                      placeholder={t("Enter details")}
                       value={contractor}
                       onChange={(e) => setContractor(e.target.value)}
                     ></Input>
                   </SearchTd>
                   <LabelTd>
-                    <Label htmlFor="product_name">E-mobility 요금제</Label>
+                    <Label htmlFor="product_name">
+                      {t("E-mobility Subs.Plan")}
+                    </Label>
                   </LabelTd>
                   <SearchTd>
                     <MultiSelect
@@ -119,13 +125,13 @@ function Vehicle() {
                 <tr>
                   <SearchTd colSpan="6">
                     <ColorButton type="submit" style={{ marginBottom: "0px" }}>
-                      검색
+                      {t("Search")}
                     </ColorButton>
                     <FormButton
                       onClick={onReset}
                       style={{ marginBottom: "0px" }}
                     >
-                      초기화
+                      {t("Clear")}
                     </FormButton>
                   </SearchTd>
                 </tr>
@@ -135,7 +141,7 @@ function Vehicle() {
         </Form>
       </div>
       <div>
-        <BasicTable data={data} />
+        <BasicTable data={data} columns={vehicleListColumns} />
       </div>
     </ContentBox>
   );

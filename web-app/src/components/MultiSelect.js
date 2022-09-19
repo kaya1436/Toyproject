@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useRef } from "react";
 import Select from "react-select";
 import { selectStyles } from "./TableStyle";
@@ -8,7 +9,7 @@ export const MultiSelect = (props) => {
 
   const selectAllOption = {
     value: "<SELECT_ALL>",
-    label: "전체선택",
+    label: t("Select all"),
   };
 
   const isSelectAllSelected = () =>
@@ -56,7 +57,7 @@ export const MultiSelect = (props) => {
       onChange={onChange}
       isMulti
       styles={selectStyles}
-      placeholder="전체선택"
+      placeholder={t("Select all")}
       isClearable={false}
       components={{ IndicatorSeparator: null }}
     />

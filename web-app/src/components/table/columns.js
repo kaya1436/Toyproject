@@ -1,4 +1,4 @@
-export const COLUMNS = [
+export const vehicleListColumns = [
   {
     Header: "번호",
     accessor: "name",

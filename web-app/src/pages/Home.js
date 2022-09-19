@@ -6,6 +6,7 @@ import backImg from "../assets/img/img_intro_bg.webp";
 import logo from "../assets/img/logo_hyundai.svg";
 import logo_e from "../assets/img/logo_emobility.webp";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 function Home() {
   const Container = styled.div`
@@ -46,8 +47,11 @@ function Home() {
   `;
 
   const { t, i18n } = useTranslation();
-  const changeLang = (value) => {
-    i18n.changeLanguage(value);
+  const [lang, setLang] = useState(localStorage.getItem("language"));
+  const changeLang = (e) => {
+    setLang(e);
+    i18n.changeLanguage(e);
+    localStorage.setItem("language", e);
   };
 
   const { Option } = Select;
@@ -58,7 +62,7 @@ function Home() {
           <Header>
             <img src={logo} />
             <Select
-              defaultValue={t("ko")}
+              value={lang}
               bordered={false}
               style={{ width: "100px" }}
               onChange={changeLang}

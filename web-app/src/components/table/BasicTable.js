@@ -1,11 +1,11 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFilters, usePagination, useRowSelect, useTable } from "react-table";
 import { Checkbox } from "./Checkbox";
-import { COLUMNS } from "./columns";
 import { GlobalFilter, PageFilter } from "./TableFilter";
 import {
   ColumnFilter,
   FilterDiv,
+  Loading,
   Page,
   PageDiv,
   Table,
@@ -15,9 +15,10 @@ import {
   TheadTr,
 } from "./tableStyle";
 import Pagination from "./Paginatioin";
+import { SpinnerCircularFixed } from "spinners-react";
 
 function BasicTable(props) {
-  const columns = useMemo(() => COLUMNS, []);
+  const columns = useMemo(() => props.columns, [props.columns]);
   const data = useMemo(() => props.data, [props.data]);
 
   const {
@@ -52,6 +53,13 @@ function BasicTable(props) {
   );
 
   const { globalFilter, pageSize } = state;
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <>
@@ -89,18 +97,30 @@ function BasicTable(props) {
           ))}
         </Thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <TbodyTr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
-              </TbodyTr>
-            );
-          })}
+          {rows.length > 0 && !loading ? (
+            page.map((row) => {
+              prepareRow(row);
+              return (
+                <TbodyTr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    );
+                  })}
+                </TbodyTr>
+              );
+            })
+          ) : (
+            <Loading>
+              <SpinnerCircularFixed
+                size={70}
+                thickness={80}
+                speed={100}
+                color="rgb(0,0,0)"
+                secondaryColor="rgb(220,220,220)"
+              />
+            </Loading>
+          )}
         </tbody>
       </Table>
       <PageDiv>

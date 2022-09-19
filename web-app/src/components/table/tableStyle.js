@@ -105,3 +105,11 @@ export const PageButton = styled.button`
     width: 23px;
   }
 `;
+
+export const Loading = styled.div`
+  height: 40vh;
+  width: 830px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

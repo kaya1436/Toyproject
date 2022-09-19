@@ -1,5 +1,6 @@
 import logo_e from "../assets/img/logo_emobility.webp";
 import { Link } from "react-router-dom";
+import { t } from "i18next";
 
 function Login() {
   return (
@@ -9,7 +10,7 @@ function Login() {
         <Link to="/vehicle">
           <button className="go-to">google login</button>
         </Link>
-        <Link to="/signup">회원가입</Link>
+        <Link to="/signup">{t("signup")}</Link>
       </div>
     </div>
   );

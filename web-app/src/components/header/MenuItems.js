@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
@@ -49,7 +50,7 @@ function MenuItems({ items, depthLevel }) {
             onClick={() => setDropdown((prev) => !prev)}
           >
             {depthLevel === 0 ? (
-              items.title
+              t(items.title)
             ) : (
               <Link to={items.url}>{items.title}</Link>
             )}
@@ -83,7 +84,7 @@ function MenuItems({ items, depthLevel }) {
           />
         </>
       ) : (
-        <Link to={items.url}>{items.title}</Link>
+        <Link to={items.url}>{t(items.title)}</Link>
       )}
     </li>
   );

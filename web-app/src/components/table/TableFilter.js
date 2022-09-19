@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import Select from "react-select";
 import { selectStyles } from "../TableStyle";
 
@@ -23,10 +24,10 @@ export const PageFilter = ({ setPageSize }) => {
 
 export const GlobalFilter = ({ setFilter }) => {
   const options = [
-    { value: "", label: "전체" },
-    { value: "Europe", label: "미등록차량" },
-    { value: "Asia", label: "등록차량" },
-    { value: "Americas", label: "서비스탈퇴 차량" },
+    { value: "", label: t("All") },
+    { value: "Europe", label: t("E-mobility unregistered vehicle") },
+    { value: "Asia", label: t("E-mobility registered vehicle") },
+    { value: "Americas", label: t("Service withdrawal vehicle") },
   ];
 
   return (
@@ -34,7 +35,7 @@ export const GlobalFilter = ({ setFilter }) => {
       options={options}
       onChange={(e) => setFilter("region", e.value)}
       styles={selectStyles}
-      placeholder="전체"
+      placeholder={t("All")}
       components={{ IndicatorSeparator: null }}
     />
   );
