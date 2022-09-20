@@ -4,8 +4,11 @@ body {
   height: 100%;
   width: 100%;
   font-family: "Noto Sans KR", sans-serif;
-  overflow: auto;
 }
 ::-webkit-scrollbar {
-  display: none;
+  width: 5px;
+  height: 0;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #eaeaea;
 }

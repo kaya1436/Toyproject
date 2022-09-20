@@ -1,24 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-export const usePaginationPages = ({ gotoPage, length, pageSize }) => {
+export const usePagination = ({ gotoPage, pageSize, pageCount }) => {
   const [currentPage, setCurrentPage] = useState(1);
-
-  const totalPages = useMemo(() => {
-    return Math.ceil(length / pageSize);
-  }, [length, pageSize]);
 
   const canGo = useMemo(() => {
     return {
-      next: currentPage < totalPages,
+      next: currentPage < pageCount,
       previous: currentPage - 1 > 0,
     };
-  }, [currentPage, totalPages]);
+  }, [currentPage, pageCount]);
 
   const pages = useMemo(() => {
     const start = Math.floor((currentPage - 1) / 5) * 5;
-    const end = start + 5 > totalPages ? totalPages : start + 5;
+    const end = start + 5 > pageCount ? pageCount : start + 5;
     return Array.from({ length: end - start }, (_, i) => start + i + 1);
-  }, [currentPage, totalPages]);
+  }, [currentPage, pageCount]);
 
   useEffect(() => {
     gotoPage(currentPage - 1);
@@ -53,6 +49,6 @@ export const usePaginationPages = ({ gotoPage, length, pageSize }) => {
     goTo,
     goNext,
     goPrev,
-    totalPages,
+    pageCount,
   };
 };

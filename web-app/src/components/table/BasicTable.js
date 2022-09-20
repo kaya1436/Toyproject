@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFilters, usePagination, useRowSelect, useTable } from "react-table";
 import { Checkbox } from "./Checkbox";
-import { GlobalFilter, PageFilter } from "./TableFilter";
+import { PageFilter, RegionFilter } from "./TableFilter";
 import {
   ColumnFilter,
   FilterDiv,
@@ -15,12 +15,9 @@ import {
   TheadTr,
 } from "./tableStyle";
 import Pagination from "./Paginatioin";
-import { SpinnerCircularFixed } from "spinners-react";
+import { Oval } from "react-loader-spinner";
 
-function BasicTable(props) {
-  const columns = useMemo(() => props.columns, [props.columns]);
-  const data = useMemo(() => props.data, [props.data]);
-
+function BasicTable({ data, columns }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -29,12 +26,13 @@ function BasicTable(props) {
     state,
     page,
     gotoPage,
+    pageCount,
     setPageSize,
     setFilter,
     rows,
     selectedFlatRows,
   } = useTable(
-    { columns, data, initialState: { pageIndex: 0, pageSize: 10 } },
+    { columns, data, initialState: { pageSize: 10 } },
     useFilters,
     usePagination,
     useRowSelect,
@@ -52,7 +50,8 @@ function BasicTable(props) {
     }
   );
 
-  const { globalFilter, pageSize } = state;
+  const { regionFilter, pageSize } = state;
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
@@ -82,7 +81,7 @@ function BasicTable(props) {
             <PageFilter filter={pageSize} setPageSize={setPageSize} />
           </Page>
           <ColumnFilter>
-            <GlobalFilter filter={globalFilter} setFilter={setFilter} />
+            <RegionFilter filter={regionFilter} setFilter={setFilter} />
           </ColumnFilter>
         </FilterDiv>
       </TableTop>
@@ -111,24 +110,29 @@ function BasicTable(props) {
               );
             })
           ) : (
-            <Loading>
-              <SpinnerCircularFixed
-                size={70}
-                thickness={80}
-                speed={100}
-                color="rgb(0,0,0)"
-                secondaryColor="rgb(220,220,220)"
-              />
-            </Loading>
+            <tr>
+              <td colSpan={8}>
+                <Loading>
+                  <Oval
+                    height={70}
+                    color="rgb(0,0,0)"
+                    visible={true}
+                    ariaLabel="oval-loading"
+                    secondaryColor="rgb(210,210,210)"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                  />
+                </Loading>
+              </td>
+            </tr>
           )}
         </tbody>
       </Table>
       <PageDiv>
         <Pagination
           gotoPage={gotoPage}
-          length={rows.length}
           pageSize={pageSize}
-          setPageSize={setPageSize}
+          pageCount={pageCount}
         />
       </PageDiv>
 

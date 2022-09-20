@@ -57,6 +57,7 @@ function Vehicle() {
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <ContentBox>
       <div>

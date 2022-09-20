@@ -22,7 +22,7 @@ export const PageFilter = ({ setPageSize }) => {
   );
 };
 
-export const GlobalFilter = ({ setFilter }) => {
+export const RegionFilter = ({ setFilter }) => {
   const options = [
     { value: "", label: t("All") },
     { value: "Europe", label: t("E-mobility unregistered vehicle") },
