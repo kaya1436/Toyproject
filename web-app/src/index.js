@@ -8,11 +8,9 @@ import i18n from "./locale/i18n";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <I18nextProvider i18n={i18n}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </I18nextProvider>
-  </React.StrictMode>
+  <I18nextProvider i18n={i18n}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </I18nextProvider>
 );

@@ -15,6 +15,7 @@ import {
 import { TableDivision } from "../components/SearchTable";
 import { useState } from "react";
 import { MultiSelect } from "../components/MultiSelect";
+import GridTable from "./gridTable";
 
 function VehicleModel() {
   const [input, setInput] = useState("");
@@ -36,52 +37,60 @@ function VehicleModel() {
 
   return (
     <ContentBox>
-      <Form autoComplete="off" onSubmit={onSubmit}>
-        <ContentTitle>차량모델관리</ContentTitle>
-        <Link to="/vehicleModel/create">
-          <ColorButton>등록</ColorButton>
-        </Link>
-        <FormButton>삭제</FormButton>
-        <SearchBox>
-          <SearchTable>
-            <tbody>
-              <tr>
-                <LabelTd>
-                  <Label htmlFor="vehicle_name">모델명</Label>
-                </LabelTd>
-                <SearchTd>
-                  <Input
-                    placeholder="내용을 입력하세요."
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                  ></Input>
-                </SearchTd>
-                <TableDivision num="1" />
-                <td>
-                  <label>제조사</label>
-                </td>
-                <SearchTd>
-                  <MultiSelect
-                    options={options}
-                    value={selected}
-                    onChange={setSelected}
-                  />
-                </SearchTd>
-              </tr>
-              <tr>
-                <SearchTd colSpan="6">
-                  <ColorButton type="submit" style={{ marginBottom: "0px" }}>
-                    검색
-                  </ColorButton>
-                  <FormButton onClick={onReset} style={{ marginBottom: "0px" }}>
-                    초기화
-                  </FormButton>
-                </SearchTd>
-              </tr>
-            </tbody>
-          </SearchTable>
-        </SearchBox>
-      </Form>
+      <div>
+        <Form autoComplete="off" onSubmit={onSubmit}>
+          <ContentTitle>차량모델관리</ContentTitle>
+          <Link to="/vehicleModel/create">
+            <ColorButton>등록</ColorButton>
+          </Link>
+          <FormButton>삭제</FormButton>
+          <SearchBox>
+            <SearchTable>
+              <tbody>
+                <tr>
+                  <LabelTd>
+                    <Label htmlFor="vehicle_name">모델명</Label>
+                  </LabelTd>
+                  <SearchTd>
+                    <Input
+                      placeholder="내용을 입력하세요."
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                    ></Input>
+                  </SearchTd>
+                  <TableDivision num="1" />
+                  <td>
+                    <label>제조사</label>
+                  </td>
+                  <SearchTd>
+                    <MultiSelect
+                      options={options}
+                      value={selected}
+                      onChange={setSelected}
+                    />
+                  </SearchTd>
+                </tr>
+                <tr>
+                  <SearchTd colSpan="6">
+                    <ColorButton type="submit" style={{ marginBottom: "0px" }}>
+                      검색
+                    </ColorButton>
+                    <FormButton
+                      onClick={onReset}
+                      style={{ marginBottom: "0px" }}
+                    >
+                      초기화
+                    </FormButton>
+                  </SearchTd>
+                </tr>
+              </tbody>
+            </SearchTable>
+          </SearchBox>
+        </Form>
+      </div>
+      <div>
+        <GridTable />
+      </div>
     </ContentBox>
   );
 }

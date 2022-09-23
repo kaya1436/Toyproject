@@ -52,7 +52,7 @@ function MenuItems({ items, depthLevel }) {
             {depthLevel === 0 ? (
               t(items.title)
             ) : (
-              <Link to={items.url}>{items.title}</Link>
+              <Link to={items.url}>{t(items.title)}</Link>
             )}
             {depthLevel > 0 ? (
               <span className="right-arrow" />
