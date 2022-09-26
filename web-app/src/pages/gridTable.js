@@ -5,6 +5,7 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { columnDefs } from "./column";
 import {
   ArrowButton,
+  ColumnFilter,
   FilterDiv,
   Page,
   PageButton,
@@ -14,20 +15,15 @@ import {
 import Select from "react-select";
 import { selectStyles } from "../components/TableStyle";
 import axios from "axios";
-import { useMemo, useState } from "react";
-
-import DoubleArrowLeft from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import ArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import ArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import DoubleArrowRight from "@mui/icons-material/KeyboardDoubleArrowRight";
+import { useState } from "react";
+import { GridPagination } from "./GridPagination";
+import { t } from "i18next";
 
 const GridTable = () => {
   const [gridApi, setGridApi] = useState();
   const [rowData, setRowData] = useState();
   const [totalPage, setTotalPage] = useState();
   const [currentPage, setCurrentPage] = useState();
-  const [previousDisable, setPreviousDisable] = useState(true);
-  const [nextDisable, setNextDisable] = useState(false);
 
   const onGridReady = (params) => {
     setGridApi(params);
@@ -48,6 +44,12 @@ const GridTable = () => {
     { value: "50", label: "50" },
     { value: "100", label: "100" },
   ];
+  const options = [
+    { value: "", label: t("All") },
+    { value: "Europe", label: t("E-mobility unregistered vehicle") },
+    { value: "Asia", label: t("E-mobility registered vehicle") },
+    { value: "Americas", label: t("Service withdrawal vehicle") },
+  ];
   const pageChange = (e) => {
     gridApi.api.paginationSetPageSize(e.value);
     gridApi.api.paginationGoToPage(0);
@@ -56,25 +58,13 @@ const GridTable = () => {
   const onPaginationChanged = (e) => {
     const currentPage = e.api.paginationGetCurrentPage() + 1;
     const totalPage = e.api.paginationGetTotalPages();
-
     setTotalPage(totalPage);
     setCurrentPage(currentPage);
-    if (e.api.currentPage === 0) {
-      setPreviousDisable(true);
-    } else {
-      setPreviousDisable(false);
-    }
-    if (e.api.currentPage + 1 === totalPage) {
-      setNextDisable(true);
-    } else {
-      setNextDisable(false);
-    }
   };
-  const pages = useMemo(() => {
-    const start = Math.floor((currentPage - 1) / 5) * 5;
-    const end = start + 5 > totalPage ? totalPage : start + 5;
-    return Array.from({ length: end - start }, (_, i) => start + i + 1);
-  }, [currentPage, totalPage]);
+  const onFIlterTextChange = (e) => {
+    gridApi.api.setQuickFilter(e.value);
+    gridApi.api.paginationGoToPage(0);
+  };
 
   return (
     <>
@@ -97,11 +87,20 @@ const GridTable = () => {
             <Select
               options={pageOptions}
               onChange={pageChange}
-              defaultValue={{ value: "20", label: "20" }}
+              defaultValue={pageOptions[0]}
               styles={selectStyles}
               components={{ IndicatorSeparator: null }}
             />
           </Page>
+          <ColumnFilter>
+            <Select
+              options={options}
+              onChange={onFIlterTextChange}
+              styles={selectStyles}
+              placeholder={t("All")}
+              components={{ IndicatorSeparator: null }}
+            />
+          </ColumnFilter>
         </FilterDiv>
       </TableTop>
       <div className="ag-theme-alpine" style={{ width: "100%" }}>
@@ -120,41 +119,11 @@ const GridTable = () => {
           onPaginationChanged={onPaginationChanged}
         />
       </div>
-      <PageSpan>
-        <ArrowButton
-          onClick={() => gridApi.api.paginationGoToFirstPage()}
-          disabled={previousDisable}
-        >
-          <DoubleArrowLeft />
-        </ArrowButton>
-        <ArrowButton
-          onClick={() => gridApi.api.paginationGoToPreviousPage()}
-          disabled={previousDisable}
-        >
-          <ArrowLeft />
-        </ArrowButton>
-        {pages.map((page, i) => (
-          <PageButton
-            className={currentPage === page ? "active" : null}
-            onClick={() => gridApi.api.paginationGoToPage(page)}
-            key={i}
-          >
-            {page}
-          </PageButton>
-        ))}
-        <ArrowButton
-          onClick={() => gridApi.api.paginationGoToNextPage()}
-          disabled={nextDisable}
-        >
-          <ArrowRight />
-        </ArrowButton>
-        <ArrowButton
-          onClick={() => gridApi.api.paginationGoToLastPage()}
-          disabled={nextDisable}
-        >
-          <DoubleArrowRight />
-        </ArrowButton>
-      </PageSpan>
+      <GridPagination
+        currentPage={currentPage}
+        totalPage={totalPage}
+        gridApi={gridApi}
+      />
     </>
   );
 };
