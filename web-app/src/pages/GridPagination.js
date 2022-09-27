@@ -9,6 +9,24 @@ import {
   PageSpan,
 } from "../components/table/tableStyle";
 
+export const GridTotalRow = ({ totalRow }) => {
+  return (
+    <div>
+      <span style={{ color: "rgb(137,137,137)", marginRight: "2px" }}>
+        Total
+      </span>
+      <span
+        style={{
+          fontWeight: "bold",
+          textDecoration: "underline",
+        }}
+      >
+        {totalRow}
+      </span>
+    </div>
+  );
+};
+
 export const GridPagination = ({ currentPage, totalPage, gridApi }) => {
   const canGo = useMemo(() => {
     return {

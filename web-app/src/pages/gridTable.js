@@ -1,29 +1,35 @@
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-alpine.css";
-
+import "ag-grid-community/dist/styles/ag-theme-material.css";
 import { columnDefs } from "./column";
 import {
-  ArrowButton,
   ColumnFilter,
   FilterDiv,
-  Page,
-  PageButton,
-  PageSpan,
   TableTop,
 } from "../components/table/tableStyle";
 import Select from "react-select";
 import { selectStyles } from "../components/TableStyle";
 import axios from "axios";
-import { useState } from "react";
-import { GridPagination } from "./GridPagination";
+import { useMemo, useState } from "react";
+import { GridPagination, GridTotalRow } from "./GridPagination";
 import { t } from "i18next";
+import { GridPageFilter } from "./GridPageFilter";
+import Loading from "./Loading";
+import "../css/gridTable.css";
 
 const GridTable = () => {
   const [gridApi, setGridApi] = useState();
   const [rowData, setRowData] = useState();
   const [totalPage, setTotalPage] = useState();
   const [currentPage, setCurrentPage] = useState();
+  const [totalRow, setTotalRow] = useState();
+
+  const textOptions = [
+    { value: "", label: t("All") },
+    { value: "Europe", label: t("E-mobility unregistered vehicle") },
+    { value: "Asia", label: t("E-mobility registered vehicle") },
+    { value: "Americas", label: t("Service withdrawal vehicle") },
+  ];
 
   const onGridReady = (params) => {
     setGridApi(params);
@@ -31,71 +37,64 @@ const GridTable = () => {
     axios
       .get("https://restcountries.com/v2/all")
       .then((res) => updateData(res.data));
+    params.api.sizeColumnsToFit();
   };
-  const defaultColDef = { flex: 1, autoHeight: false };
+  const onGridSizeChanged = () => {
+    gridApi.api.sizeColumnsToFit();
+  };
+  const defaultColDef = {
+    autoHeight: false,
+    wrapText: true,
+    wrapHeaderText: true,
+  };
 
   const onSelectionChanged = (e) => {
     console.log(e.api.getSelectedRows());
-  };
-  const pageOptions = [
-    { value: "10", label: "10" },
-    { value: "20", label: "20" },
-    { value: "30", label: "30" },
-    { value: "50", label: "50" },
-    { value: "100", label: "100" },
-  ];
-  const options = [
-    { value: "", label: t("All") },
-    { value: "Europe", label: t("E-mobility unregistered vehicle") },
-    { value: "Asia", label: t("E-mobility registered vehicle") },
-    { value: "Americas", label: t("Service withdrawal vehicle") },
-  ];
-  const pageChange = (e) => {
-    gridApi.api.paginationSetPageSize(e.value);
-    gridApi.api.paginationGoToPage(0);
   };
 
   const onPaginationChanged = (e) => {
     const currentPage = e.api.paginationGetCurrentPage() + 1;
     const totalPage = e.api.paginationGetTotalPages();
+    const totalRow = e.api.paginationGetRowCount();
     setTotalPage(totalPage);
     setCurrentPage(currentPage);
+    setTotalRow(totalRow);
   };
-  const onFIlterTextChange = (e) => {
-    gridApi.api.setQuickFilter(e.value);
+  let regionFilter = "";
+  const externalFilterChanged = (e) => {
+    regionFilter = e.value;
+    gridApi.api.onFilterChanged();
     gridApi.api.paginationGoToPage(0);
   };
+  const isExternalFilterPresent = () => {
+    return regionFilter !== "";
+  };
+  const doesExternalFilterPass = (node) => {
+    switch (regionFilter) {
+      case "":
+        return true;
+      case "Europe":
+        return node.data.region === "Europe";
+      case "Asia":
+        return node.data.region === "Asia";
+      case "Americas":
+        return node.data.region === "Americas";
+    }
+  };
+  const loadingOverlayComponent = useMemo(() => {
+    return Loading;
+  }, []);
 
   return (
     <>
       <TableTop>
-        <div>
-          <span style={{ color: "rgb(137,137,137)", marginRight: "2px" }}>
-            Total
-          </span>
-          <span
-            style={{
-              fontWeight: "bold",
-              textDecoration: "underline",
-            }}
-          >
-            {totalPage}
-          </span>
-        </div>
+        <GridTotalRow totalRow={totalRow} />
         <FilterDiv>
-          <Page>
-            <Select
-              options={pageOptions}
-              onChange={pageChange}
-              defaultValue={pageOptions[0]}
-              styles={selectStyles}
-              components={{ IndicatorSeparator: null }}
-            />
-          </Page>
+          <GridPageFilter gridApi={gridApi} />
           <ColumnFilter>
             <Select
-              options={options}
-              onChange={onFIlterTextChange}
+              options={textOptions}
+              onChange={externalFilterChanged}
               styles={selectStyles}
               placeholder={t("All")}
               components={{ IndicatorSeparator: null }}
@@ -103,7 +102,7 @@ const GridTable = () => {
           </ColumnFilter>
         </FilterDiv>
       </TableTop>
-      <div className="ag-theme-alpine" style={{ width: "100%" }}>
+      <div className="ag-theme-material">
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
@@ -117,13 +116,20 @@ const GridTable = () => {
           domLayout="autoHeight"
           suppressPaginationPanel={true}
           onPaginationChanged={onPaginationChanged}
+          isExternalFilterPresent={isExternalFilterPresent}
+          doesExternalFilterPass={doesExternalFilterPass}
+          loadingOverlayComponent={loadingOverlayComponent}
+          suppressRowClickSelection={true}
+          onGridSizeChanged={onGridSizeChanged}
         />
       </div>
-      <GridPagination
-        currentPage={currentPage}
-        totalPage={totalPage}
-        gridApi={gridApi}
-      />
+      <div>
+        <GridPagination
+          currentPage={currentPage}
+          totalPage={totalPage}
+          gridApi={gridApi}
+        />
+      </div>
     </>
   );
 };

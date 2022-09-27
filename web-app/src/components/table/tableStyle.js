@@ -80,6 +80,8 @@ export const PageSpan = styled.span`
   display: flex;
   align-items: center;
   line-height: 23px;
+  justify-content: center;
+  margin-top: 24px;
 `;
 
 export const PageButton = styled.button`
@@ -106,8 +108,8 @@ export const PageButton = styled.button`
   }
 `;
 
-export const Loading = styled.div`
-  height: 40vh;
+export const LoadingDiv = styled.div`
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;

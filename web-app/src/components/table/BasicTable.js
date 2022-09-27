@@ -5,7 +5,7 @@ import { PageFilter, RegionFilter } from "./TableFilter";
 import {
   ColumnFilter,
   FilterDiv,
-  Loading,
+  LoadingDiv,
   Page,
   PageDiv,
   Table,
@@ -112,7 +112,7 @@ function BasicTable({ data, columns }) {
           ) : (
             <tr>
               <td colSpan={8}>
-                <Loading>
+                <LoadingDiv>
                   <Oval
                     height={70}
                     color="rgb(0,0,0)"
@@ -122,7 +122,7 @@ function BasicTable({ data, columns }) {
                     strokeWidth={2}
                     strokeWidthSecondary={2}
                   />
-                </Loading>
+                </LoadingDiv>
               </td>
             </tr>
           )}

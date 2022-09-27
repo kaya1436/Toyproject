@@ -15,7 +15,7 @@ import {
 import { TableDivision } from "../components/SearchTable";
 import { useState } from "react";
 import { MultiSelect } from "../components/MultiSelect";
-import GridTable from "./gridTable";
+import GridTable from "./GridTable";
 
 function VehicleModel() {
   const [input, setInput] = useState("");
@@ -30,7 +30,7 @@ function VehicleModel() {
     setSelected([]);
   };
 
-  const onSubmit = (e) => {
+  const onSearch = (e) => {
     e.preventDefault();
     console.log(JSON.stringify(defaultValues));
   };
@@ -38,7 +38,7 @@ function VehicleModel() {
   return (
     <ContentBox>
       <div>
-        <Form autoComplete="off" onSubmit={onSubmit}>
+        <Form autoComplete="off">
           <ContentTitle>차량모델관리</ContentTitle>
           <Link to="/vehicleModel/create">
             <ColorButton>등록</ColorButton>
@@ -72,7 +72,11 @@ function VehicleModel() {
                 </tr>
                 <tr>
                   <SearchTd colSpan="6">
-                    <ColorButton type="submit" style={{ marginBottom: "0px" }}>
+                    <ColorButton
+                      type="submit"
+                      style={{ marginBottom: "0px" }}
+                      onClick={onSearch}
+                    >
                       검색
                     </ColorButton>
                     <FormButton
