@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MultiSelect } from "../components/MultiSelect";
-import BasicTable from "../components/table/BasicTable";
 import {
   ColorButton,
   ContentBox,
@@ -17,9 +16,8 @@ import {
   TableDivLeft,
   TableDivRight,
 } from "../components/TableStyle";
-import axios from "axios";
-import { vehicleListColumns } from "../components/table/columns";
 import { t } from "i18next";
+import GridTable from "../components/table/GridTable";
 
 function Vehicle() {
   const [vin, setVin] = useState("");
@@ -45,23 +43,14 @@ function Vehicle() {
     setSelected([]);
   };
 
-  const onSubmit = (e) => {
+  const onSearch = (e) => {
     e.preventDefault();
     console.log(JSON.stringify(defaultValues));
   };
-  const [data, setData] = useState([]);
-  const fetchData = async () => {
-    const response = await axios.get("https://restcountries.com/v2/all");
-    setData(response.data);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <ContentBox>
       <div>
-        <Form onSubmit={onSubmit} autoComplete="off">
+        <Form autoComplete="off">
           <ContentTitle>{t("Vehicle Info.")}</ContentTitle>
           <Link to="/vehicle/create">
             <ColorButton>{t("Register")}</ColorButton>
@@ -125,7 +114,11 @@ function Vehicle() {
                 </tr>
                 <tr>
                   <SearchTd colSpan="6">
-                    <ColorButton type="submit" style={{ marginBottom: "0px" }}>
+                    <ColorButton
+                      type="submit"
+                      onClick={onSearch}
+                      style={{ marginBottom: "0px" }}
+                    >
                       {t("Search")}
                     </ColorButton>
                     <FormButton
@@ -142,7 +135,7 @@ function Vehicle() {
         </Form>
       </div>
       <div>
-        <BasicTable data={data} columns={vehicleListColumns} />
+        <GridTable />
       </div>
     </ContentBox>
   );

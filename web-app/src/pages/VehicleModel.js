@@ -15,7 +15,7 @@ import {
 import { TableDivision } from "../components/SearchTable";
 import { useState } from "react";
 import { MultiSelect } from "../components/MultiSelect";
-import GridTable from "./GridTable";
+import GridTable from "../components/table/GridTable";
 
 function VehicleModel() {
   const [input, setInput] = useState("");

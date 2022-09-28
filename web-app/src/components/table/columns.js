@@ -1,34 +1,29 @@
 export const vehicleListColumns = [
   {
-    Header: "번호",
-    accessor: "name",
+    checkboxSelection: true,
+    headerCheckboxSelection: true,
+    width: 48,
+    lockPosition: true,
   },
+  { field: "name", headerName: "번호", lockPosition: true },
+  { field: "nativeName", headerName: "VIN No.", lockPosition: true },
   {
-    Header: "VIN No.",
-    accessor: "nativeName",
-  },
-  {
-    Header: "차량번호",
-    accessor: "capital",
-    Cell: (props) => {
-      const data = props.row.original.capital;
-      return data ? data : "-";
+    field: "capital",
+    headerName: "차량번호",
+    cellRenderer: ({ value }) => {
+      return value ? value : "-";
     },
+    lockPosition: true,
   },
   {
-    Header: "E-mobility 요금제",
-    Cell: (props) => <img src={props.row.original.flag} width={50} />,
+    field: "flag",
+    headerName: "E-mobility 요금제",
+    cellRenderer: ({ value }) => {
+      return <img src={value} width="50" />;
+    },
+    lockPosition: true,
   },
-  {
-    Header: "가입일",
-    accessor: "region",
-  },
-  {
-    Header: "종료일",
-    accessor: "population",
-  },
-  {
-    Header: "현재위치",
-    accessor: "numericCode",
-  },
+  { headerName: "가입일", field: "region", lockPosition: true },
+  { headerName: "종료일", field: "population", lockPosition: true },
+  { headerName: "현재위치", field: "numericCode", lockPosition: true },
 ];

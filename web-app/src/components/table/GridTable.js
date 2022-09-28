@@ -1,21 +1,17 @@
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
-import { columnDefs } from "./column";
-import {
-  ColumnFilter,
-  FilterDiv,
-  TableTop,
-} from "../components/table/tableStyle";
+import { ColumnFilter, FilterDiv, PageDiv, TableTop } from "./GridStyle";
 import Select from "react-select";
-import { selectStyles } from "../components/TableStyle";
+import { selectStyles } from "../TableStyle";
 import axios from "axios";
 import { useMemo, useState } from "react";
 import { GridPagination, GridTotalRow } from "./GridPagination";
 import { t } from "i18next";
 import { GridPageFilter } from "./GridPageFilter";
-import Loading from "./Loading";
-import "../css/gridTable.css";
+import Loading from "../../pages/Loading";
+import "../../css/gridTable.css";
+import { vehicleListColumns } from "./columns";
 
 const GridTable = () => {
   const [gridApi, setGridApi] = useState();
@@ -105,7 +101,7 @@ const GridTable = () => {
       <div className="ag-theme-material">
         <AgGridReact
           rowData={rowData}
-          columnDefs={columnDefs}
+          columnDefs={vehicleListColumns}
           onGridReady={onGridReady}
           defaultColDef={defaultColDef}
           rowSelection="multiple"
@@ -121,14 +117,17 @@ const GridTable = () => {
           loadingOverlayComponent={loadingOverlayComponent}
           suppressRowClickSelection={true}
           onGridSizeChanged={onGridSizeChanged}
+          rowHeight={45}
         />
       </div>
       <div>
-        <GridPagination
-          currentPage={currentPage}
-          totalPage={totalPage}
-          gridApi={gridApi}
-        />
+        <PageDiv>
+          <GridPagination
+            currentPage={currentPage}
+            totalPage={totalPage}
+            gridApi={gridApi}
+          />
+        </PageDiv>
       </div>
     </>
   );

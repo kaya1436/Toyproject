@@ -3,11 +3,7 @@ import ArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import DoubleArrowRight from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { useMemo } from "react";
-import {
-  ArrowButton,
-  PageButton,
-  PageSpan,
-} from "../components/table/tableStyle";
+import { ArrowButton, PageButton, PageSpan } from "./GridStyle";
 
 export const GridTotalRow = ({ totalRow }) => {
   return (

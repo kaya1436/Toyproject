@@ -1,36 +1,5 @@
 import styled from "styled-components";
 
-export const Table = styled.table`
-  width: 100%;
-  text-align: center;
-  table-layout: fixed;
-  border-collapse: collapse;
-`;
-
-export const Thead = styled.thead`
-  line-height: 20px;
-`;
-
-export const TheadTr = styled.tr`
-  height: 42px;
-  min-height: 42px;
-  background-color: rgb(250, 250, 250);
-  border-top: 1px solid rgb(0, 0, 0);
-  border-bottom: 1px solid rgb(225, 227, 230);
-`;
-
-export const TbodyTr = styled.tr`
-  cursor: pointer;
-  border-top: none;
-  border-bottom: 1px solid rgba(132, 132, 132, 0.2);
-  font-size: 13px;
-  min-height: 41px;
-  height: 41px;
-  &:hover {
-    background-color: rgb(240, 240, 240);
-  }
-`;
-
 export const TableTop = styled.div`
   width: 100%;
   margin-top: 50px;
@@ -80,8 +49,6 @@ export const PageSpan = styled.span`
   display: flex;
   align-items: center;
   line-height: 23px;
-  justify-content: center;
-  margin-top: 24px;
 `;
 
 export const PageButton = styled.button`
@@ -109,7 +76,6 @@ export const PageButton = styled.button`
 `;
 
 export const LoadingDiv = styled.div`
-  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
