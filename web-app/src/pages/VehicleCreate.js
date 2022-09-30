@@ -11,12 +11,12 @@ import {
   Label,
   LabelTd,
   SearchTd,
-} from "../components/TableStyle";
+} from "../components/search/searchTableStyle";
 import {
   TableDivision,
   TableLabel,
   VehicleInfoTable,
-} from "../components/SearchTable";
+} from "../components/search/tableForm";
 
 function VehicleCreate() {
   return (

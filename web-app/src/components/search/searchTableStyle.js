@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import blankImg from "../assets/img/photo-f.svg";
+import blankImg from "../../assets/img/photo-f.svg";
 
 export const ContentBox = styled.div`
   width: 100%;

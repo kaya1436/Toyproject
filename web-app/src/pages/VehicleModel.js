@@ -11,10 +11,10 @@ import {
   SearchBox,
   SearchTable,
   SearchTd,
-} from "../components/TableStyle";
-import { TableDivision } from "../components/SearchTable";
+} from "../components/search/searchTableStyle";
+import { TableDivision } from "../components/search/tableForm";
 import { useState } from "react";
-import { MultiSelect } from "../components/MultiSelect";
+import { MultiSelect } from "../components/search/MultiSelect";
 import GridTable from "../components/table/GridTable";
 
 function VehicleModel() {
@@ -60,7 +60,7 @@ function VehicleModel() {
                   </SearchTd>
                   <TableDivision num="1" />
                   <td>
-                    <label>제조사</label>
+                    <Label>제조사</Label>
                   </td>
                   <SearchTd>
                     <MultiSelect

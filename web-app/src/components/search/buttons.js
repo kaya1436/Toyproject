@@ -117,10 +117,10 @@ export const ResetButton = ({ setContractor, setSelected }) => {
 
 export const SearchButton = ({ contractor, selected }) => {
   const vin = useRecoilValue(vinState);
-  const vehicleNumber = useRecoilValue(ve);
+  const vehicleNumber = useRecoilValue(vehicleNumberState);
   const defaultValues = {
     vin: vin,
-    license_plate_number: number,
+    license_plate_number: vehicleNumber,
     계약자명: contractor,
     brand: selected,
   };

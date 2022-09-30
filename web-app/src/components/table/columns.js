@@ -5,19 +5,21 @@ export const vehicleListColumns = [
     width: 48,
     lockPosition: true,
   },
-  { field: "name", headerName: "번호", lockPosition: true },
-  { field: "nativeName", headerName: "VIN No.", lockPosition: true },
+  { headerName: "번호", field: "name", lockPosition: true },
+  { headerName: "VIN No.", field: "nativeName", lockPosition: true },
   {
-    field: "capital",
     headerName: "차량번호",
+    field: "capital",
+
     cellRenderer: ({ value }) => {
       return value ? value : "-";
     },
     lockPosition: true,
   },
   {
-    field: "flag",
     headerName: "E-mobility 요금제",
+    field: "flag",
+
     cellRenderer: ({ value }) => {
       return <img src={value} width="50" />;
     },

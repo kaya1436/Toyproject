@@ -1,0 +1,13 @@
+.toast {
+  top: 7rem !important;
+}
+
+.Toastify__toast-container--top-center .Toastify__toast-body {
+  text-align: center;
+  font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: rgb(100, 100, 100);
+}
+.Toastify--animate {
+  animation-duration: 0.3s;
+}

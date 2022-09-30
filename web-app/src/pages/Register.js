@@ -2,6 +2,11 @@ import logo_e from "../assets/img/logo_emobility.webp";
 import "../css/signup.css";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { t } from "i18next";
+import { DatePicker } from "antd";
+import ko from "antd/es/date-picker/locale/ko_KR";
+import moment from "moment";
+import "moment/locale/ko";
 
 function Register() {
   const [name, setName] = useState("");
@@ -9,6 +14,7 @@ function Register() {
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
   const fileInputRef = useRef("");
+  const lang = localStorage.getItem("language");
 
   useEffect(() => {
     if (image) {
@@ -35,19 +41,22 @@ function Register() {
     formData.append("my_image", image);
     formData.append("name", name);
     formData.append("birth_data", birth);
-
     try {
       await axios.post("api주소", formData);
     } catch (error) {
       console.log(error);
     }
   };
+  const updateDate = (value, dateString) => {
+    setBirth(dateString);
+  };
+
   return (
     <div className="login-bg">
       <div className="box">
         <img src={logo_e} style={{ width: "350px" }} />
-        <h2>가입 정보를 입력해주세요.</h2>
-        <form onSubmit={signUp} className="signup-form">
+        <h2>{t("Please enter your registration information.")}</h2>
+        <div className="signup-form">
           {preview ? (
             <img
               className="profile-img"
@@ -74,33 +83,31 @@ function Register() {
             onChange={imgHandler}
           />
           <label htmlFor="name">
-            이름 *
+            {t("Name")}
             <input
               className="info-input"
               type="text"
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="이름"
+              placeholder={t("Name")}
               required
+              autoComplete="off"
             />
           </label>
           <label htmlFor="date">
-            생년월일 *
-            <input
-              className="info-input"
-              type="date"
-              name="date"
-              min="1990-01-01"
-              max="2022-12-31"
-              value={birth}
-              onChange={(e) => setBirth(e.target.value)}
-              pattern="\d{4}-\d{2}-\d{2}"
-              required
+            {t("Date of birth")}
+            <DatePicker
+              onChange={updateDate}
+              placeholder={t("Date of birth")}
+              locale={lang === "ko" ? ko : null}
+              showToday={false}
             />
           </label>
-          <button className="go-to">회원가입</button>
-        </form>
+          <button className="go-to" onClick={signUp}>
+            {t("Sign up")}
+          </button>
+        </div>
       </div>
     </div>
   );

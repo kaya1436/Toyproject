@@ -9,7 +9,7 @@ import {
   SearchTd,
   TableDivLeft,
   TableDivRight,
-} from "./TableStyle";
+} from "./searchTableStyle";
 
 export const VehicleInfoTable = ({ title, table }) => {
   return (

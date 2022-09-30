@@ -32,5 +32,16 @@
   "All": "All",
   "E-mobility unregistered vehicle": "E-mobility unregistered vehicle",
   "E-mobility registered vehicle": "E-mobility registered vehicle",
-  "Service withdrawal vehicle": "Service withdrawal vehicle"
+  "Service withdrawal vehicle": "Service withdrawal vehicle",
+  "Please enter your registration information.": "Please enter your registration information.",
+  "Name": "Name",
+  "Date of birth": "Date of birth",
+  "Sign up": "SIGN UP",
+  "Number": "Number",
+  "VIN No.": "VIN No.",
+  "Vehicle No.": "Vehicle No.",
+  "E-mobility Subs. Plan": "E-mobility Subs. Plan",
+  "Subscription Date": "Subscription Date",
+  "End Date": "End Date",
+  "Current location": "Current location"
 }

@@ -64,13 +64,26 @@
   outline: none;
   border-bottom: 2px solid rgb(37, 172, 204);
 }
-.info-input[type="date"] {
-  color: grey;
+.ant-picker {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid rgb(200, 200, 200);
+  margin-top: 5px;
+  padding-left: 1px;
+  color: rgb(0, 0, 0);
+  transition: none;
 }
-.info-input[type="date"]:valid {
-  color: black;
+.ant-picker:hover {
+  border-bottom: 2px solid rgb(200, 200, 200);
 }
-.info-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  font-size: 20px;
+.ant-picker-focused {
+  border: none;
+  border-bottom: 2px solid rgb(37, 172, 204);
+  box-shadow: none;
+}
+.ant-picker-input:focus {
+  border-bottom: 2px solid rgb(37, 172, 204);
+}
+.ant-picker-input > input::placeholder {
+  color: rgb(130, 130, 130);
 }

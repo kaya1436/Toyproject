@@ -1,7 +1,7 @@
 import { t } from "i18next";
 import { useRef } from "react";
 import Select from "react-select";
-import { selectStyles } from "./TableStyle";
+import { selectStyles } from "./searchTableStyle";
 
 export const MultiSelect = (props) => {
   const valueRef = useRef(props.value);

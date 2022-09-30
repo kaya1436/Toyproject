@@ -3,15 +3,17 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import { ColumnFilter, FilterDiv, PageDiv, TableTop } from "./GridStyle";
 import Select from "react-select";
-import { selectStyles } from "../TableStyle";
+import { selectStyles } from "../search/searchTableStyle";
 import axios from "axios";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { GridPagination, GridTotalRow } from "./GridPagination";
 import { t } from "i18next";
 import { GridPageFilter } from "./GridPageFilter";
 import Loading from "../../pages/Loading";
 import "../../css/gridTable.css";
 import { vehicleListColumns } from "./columns";
+import { useRecoilState } from "recoil";
+import { dataState } from "../../atom";
 
 const GridTable = () => {
   const [gridApi, setGridApi] = useState();
@@ -19,6 +21,7 @@ const GridTable = () => {
   const [totalPage, setTotalPage] = useState();
   const [currentPage, setCurrentPage] = useState();
   const [totalRow, setTotalRow] = useState();
+  const [data, setData] = useRecoilState(dataState);
 
   const textOptions = [
     { value: "", label: t("All") },
@@ -45,7 +48,7 @@ const GridTable = () => {
   };
 
   const onSelectionChanged = (e) => {
-    console.log(e.api.getSelectedRows());
+    setData(e.api.getSelectedRows());
   };
 
   const onPaginationChanged = (e) => {

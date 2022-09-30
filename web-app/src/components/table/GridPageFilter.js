@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { Page } from "./GridStyle";
-import { selectStyles } from "../TableStyle";
+import { selectStyles } from "../search/searchTableStyle";
 
 export const GridPageFilter = ({ gridApi }) => {
   const pageOptions = [

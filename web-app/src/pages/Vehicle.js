@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MultiSelect } from "../components/MultiSelect";
+import { MultiSelect } from "../components/search/MultiSelect";
 import {
   ColorButton,
   ContentBox,
@@ -15,38 +15,34 @@ import {
   SearchTable,
   TableDivLeft,
   TableDivRight,
-} from "../components/TableStyle";
+} from "../components/search/searchTableStyle";
 import { t } from "i18next";
 import GridTable from "../components/table/GridTable";
+import {
+  DeleteButton,
+  DownloadButton,
+  ResetButton,
+  SearchButton,
+  UploadButton,
+} from "../components/search/buttons";
+import { PopUp } from "../components/search/PopUp";
+import {
+  VehicleNumberInput,
+  VinInput,
+} from "../components/search/searchInputForm";
 
 function Vehicle() {
-  const [vin, setVin] = useState("");
   const [number, setNumber] = useState("");
   const [contractor, setContractor] = useState("");
   const [selected, setSelected] = useState([]);
-  const defaultValues = {
-    vin: vin,
-    license_plate_number: number,
-    계약자명: contractor,
-    brand: selected,
-  };
+
   const options = [
     { value: "test1", label: "test1" },
     { value: "test2", label: "test2" },
     { value: "test3", label: "test3" },
     { value: "test4", label: "test4" },
   ];
-  const onReset = () => {
-    setVin("");
-    setNumber("");
-    setContractor("");
-    setSelected([]);
-  };
 
-  const onSearch = (e) => {
-    e.preventDefault();
-    console.log(JSON.stringify(defaultValues));
-  };
   return (
     <ContentBox>
       <div>
@@ -55,38 +51,19 @@ function Vehicle() {
           <Link to="/vehicle/create">
             <ColorButton>{t("Register")}</ColorButton>
           </Link>
-          <FormButton>{t("Upload All")}</FormButton>
-          <FormButton>{t("Download")}</FormButton>
-          <FormButton>{t("Delete")}</FormButton>
+          <UploadButton />
+          <DownloadButton />
+          <DeleteButton />
           <FormButton>{t("Format Download")}</FormButton>
+          <PopUp />
           <SearchBox>
             <SearchTable>
               <tbody>
                 <tr>
-                  <LabelTd>
-                    <Label htmlFor="vin">{t("VIN No.")}</Label>
-                  </LabelTd>
-                  <SearchTd>
-                    <Input
-                      placeholder={t("Enter details")}
-                      value={vin}
-                      onChange={(e) => setVin(e.target.value)}
-                    ></Input>
-                  </SearchTd>
+                  <VinInput />
                   <TableDivLeft rowSpan="2" />
                   <TableDivRight rowSpan="2" />
-                  <LabelTd>
-                    <Label htmlFor="license_plate_number">
-                      {t("Vehicle No.")}
-                    </Label>
-                  </LabelTd>
-                  <SearchTd>
-                    <Input
-                      placeholder={t("Enter details")}
-                      value={number}
-                      onChange={(e) => setNumber(e.target.value)}
-                    ></Input>
-                  </SearchTd>
+                  <VehicleNumberInput />
                 </tr>
                 <tr>
                   <LabelTd>
@@ -114,19 +91,16 @@ function Vehicle() {
                 </tr>
                 <tr>
                   <SearchTd colSpan="6">
-                    <ColorButton
-                      type="submit"
-                      onClick={onSearch}
-                      style={{ marginBottom: "0px" }}
-                    >
-                      {t("Search")}
-                    </ColorButton>
-                    <FormButton
-                      onClick={onReset}
-                      style={{ marginBottom: "0px" }}
-                    >
-                      {t("Clear")}
-                    </FormButton>
+                    <SearchButton
+                      number={number}
+                      contractor={contractor}
+                      selected={selected}
+                    />
+                    <ResetButton
+                      setNumber={setNumber}
+                      setContractor={setContractor}
+                      setSelected={setSelected}
+                    />
                   </SearchTd>
                 </tr>
               </tbody>
