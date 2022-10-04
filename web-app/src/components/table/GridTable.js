@@ -5,23 +5,18 @@ import { ColumnFilter, FilterDiv, PageDiv, TableTop } from "./GridStyle";
 import Select from "react-select";
 import { selectStyles } from "../search/searchTableStyle";
 import axios from "axios";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { GridPagination, GridTotalRow } from "./GridPagination";
 import { t } from "i18next";
 import { GridPageFilter } from "./GridPageFilter";
 import Loading from "../../pages/Loading";
 import "../../css/gridTable.css";
-import { vehicleListColumns } from "./columns";
-import { useRecoilState } from "recoil";
-import { dataState } from "../../atom";
 
-const GridTable = () => {
+const GridTable = ({ textFilter, getApi, column, setData }) => {
   const [gridApi, setGridApi] = useState();
-  const [rowData, setRowData] = useState();
   const [totalPage, setTotalPage] = useState();
   const [currentPage, setCurrentPage] = useState();
   const [totalRow, setTotalRow] = useState();
-  const [data, setData] = useRecoilState(dataState);
 
   const textOptions = [
     { value: "", label: t("All") },
@@ -33,10 +28,9 @@ const GridTable = () => {
   const onGridReady = (params) => {
     setGridApi(params);
     const updateData = (data) => params.api.setRowData(data);
-    axios
-      .get("https://restcountries.com/v2/all")
-      .then((res) => updateData(res.data));
+    axios.get(getApi).then((res) => updateData(res.data));
     params.api.sizeColumnsToFit();
+    setData([]);
   };
   const onGridSizeChanged = () => {
     gridApi.api.sizeColumnsToFit();
@@ -47,7 +41,7 @@ const GridTable = () => {
     wrapHeaderText: true,
   };
 
-  const onSelectionChanged = (e) => {
+  const onRowSelected = (e) => {
     setData(e.api.getSelectedRows());
   };
 
@@ -90,26 +84,26 @@ const GridTable = () => {
         <GridTotalRow totalRow={totalRow} />
         <FilterDiv>
           <GridPageFilter gridApi={gridApi} />
-          <ColumnFilter>
-            <Select
-              options={textOptions}
-              onChange={externalFilterChanged}
-              styles={selectStyles}
-              placeholder={t("All")}
-              components={{ IndicatorSeparator: null }}
-            />
-          </ColumnFilter>
+          {textFilter ? (
+            <ColumnFilter>
+              <Select
+                options={textOptions}
+                onChange={externalFilterChanged}
+                styles={selectStyles}
+                placeholder={t("All")}
+                components={{ IndicatorSeparator: null }}
+              />
+            </ColumnFilter>
+          ) : null}
         </FilterDiv>
       </TableTop>
       <div className="ag-theme-material">
         <AgGridReact
-          rowData={rowData}
-          columnDefs={vehicleListColumns}
+          columnDefs={column}
           onGridReady={onGridReady}
           defaultColDef={defaultColDef}
           rowSelection="multiple"
-          onSelectionChanged={onSelectionChanged}
-          rowMultiSelectWithClick={true}
+          onRowSelected={onRowSelected}
           pagination={true}
           paginationPageSize={10}
           domLayout="autoHeight"

@@ -37,9 +37,7 @@ function VehicleCreate() {
                 </LabelTd>
                 <SearchTd style={{ display: "flex" }}>
                   <Input placeholder="차량번호"></Input>
-                  <ColorButton
-                    style={{ minWidth: "100px", marginBottom: "0px" }}
-                  >
+                  <ColorButton style={{ minWidth: "100px" }}>
                     중복확인
                   </ColorButton>
                 </SearchTd>
@@ -54,9 +52,7 @@ function VehicleCreate() {
                 </LabelTd>
                 <SearchTd style={{ display: "flex" }}>
                   <Input placeholder="VIN No."></Input>
-                  <ColorButton
-                    style={{ minWidth: "100px", marginBottom: "0px" }}
-                  >
+                  <ColorButton style={{ minWidth: "100px" }}>
                     중복확인
                   </ColorButton>
                 </SearchTd>

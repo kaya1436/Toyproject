@@ -1,4 +1,4 @@
-export const vehicleListColumns = [
+export const vehicleColumns = [
   {
     checkboxSelection: true,
     headerCheckboxSelection: true,
@@ -10,7 +10,6 @@ export const vehicleListColumns = [
   {
     headerName: "차량번호",
     field: "capital",
-
     cellRenderer: ({ value }) => {
       return value ? value : "-";
     },
@@ -19,7 +18,6 @@ export const vehicleListColumns = [
   {
     headerName: "E-mobility 요금제",
     field: "flag",
-
     cellRenderer: ({ value }) => {
       return <img src={value} width="50" />;
     },

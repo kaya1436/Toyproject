@@ -19,7 +19,7 @@ export const Page = styled.div`
 
 export const ColumnFilter = styled.div`
   margin-left: 10px;
-  width: 180px;
+  width: 195px;
 `;
 
 export const PageDiv = styled.div`

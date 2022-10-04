@@ -19,7 +19,7 @@ export const GridPageFilter = ({ gridApi }) => {
     <Page>
       <Select
         options={pageOptions}
-        defaultValue={{ value: "10", label: "10" }}
+        defaultValue={pageOptions[0]}
         onChange={(e) => onPaginationChanged(e.value)}
         styles={selectStyles}
         placeholder="10"

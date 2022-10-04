@@ -1,6 +1,6 @@
 import { t } from "i18next";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { selectRowState, vehicleNumberState, vinState } from "../../atom";
+import { useRecoilValue } from "recoil";
+import { vehicleModelRowState, vehicleRowState } from "../../atom";
 import { ColorButton, FormButton } from "./searchTableStyle";
 import * as xlsx from "xlsx";
 import moment from "moment";
@@ -11,17 +11,38 @@ import "../../css/toastStyle.css";
 import "react-toastify/dist/ReactToastify.css";
 import { DeletePop, DownloadPop } from "./PopUp";
 
-export const DeleteButton = () => {
-  const row = useRecoilValue(selectRowState);
-  const number = row.map((value) => value.Number);
-
+export const VehicleDeleteButton = () => {
+  const row = useRecoilValue(vehicleRowState);
+  const id = row.map((value) => value.Number);
   const handleDelete = async (e) => {
     e.preventDefault();
-    if (row.length === 0) {
+    if (id.length === 0) {
       toast(<DeletePop />);
     } else {
       try {
-        await axios.delete(`api주소/${number}`);
+        await axios.delete(`api주소/${id}`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  return (
+    <>
+      <FormButton onClick={handleDelete}>{t("Delete")}</FormButton>
+    </>
+  );
+};
+
+export const DeleteButton = () => {
+  const row = useRecoilValue(vehicleModelRowState);
+  const id = row.map((value) => value.Number);
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    if (id.length === 0) {
+      toast(<DeletePop />);
+    } else {
+      try {
+        await axios.delete(`api주소/${id}`);
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +56,7 @@ export const DeleteButton = () => {
 };
 
 export const DownloadButton = () => {
-  const excelData = useRecoilValue(selectRowState);
+  const excelData = useRecoilValue(vehicleRowState);
   const now = moment().format("YYYYMMDDhhmmss");
   const excelDownload = (e, excelData) => {
     e.preventDefault();
@@ -91,23 +112,14 @@ export const UploadButton = () => {
         type="file"
         ref={fileInput}
         onChange={handleChange}
-        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,.csv"
         style={{ display: "none" }}
       />
     </>
   );
 };
 
-export const ResetButton = ({ setContractor, setSelected }) => {
-  const [vin, setVin] = useRecoilState(vinState);
-  const [vehicleNumber, setVehicleNumber] = useRecoilState(vehicleNumberState);
-  const onReset = (e) => {
-    e.preventDefault();
-    setVin("");
-    setVehicleNumber("");
-    setContractor("");
-    setSelected([]);
-  };
+export const ResetButton = ({ onReset }) => {
   return (
     <FormButton onClick={onReset} style={{ marginBottom: "0px" }}>
       {t("Clear")}
@@ -115,19 +127,7 @@ export const ResetButton = ({ setContractor, setSelected }) => {
   );
 };
 
-export const SearchButton = ({ contractor, selected }) => {
-  const vin = useRecoilValue(vinState);
-  const vehicleNumber = useRecoilValue(vehicleNumberState);
-  const defaultValues = {
-    vin: vin,
-    license_plate_number: vehicleNumber,
-    계약자명: contractor,
-    brand: selected,
-  };
-  const onSearch = (e) => {
-    e.preventDefault();
-    console.log(defaultValues);
-  };
+export const SearchButton = ({ onSearch }) => {
   return (
     <ColorButton
       type="submit"
