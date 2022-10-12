@@ -1,0 +1,35 @@
+.ag-theme-alpine {
+  font-family: "Noto Sans KR", sans-serif;
+  --ag-odd-row-background-color: rgb(255, 255, 255);
+  --ag-odd-row-color: rgb(0, 0, 0);
+  --ag-selected-row-background-color: rgb(160, 160, 160, 0.2);
+  --ag-row-hover-color: none;
+  --ag-alpine-active-color: none;
+  --ag-input-focus-box-shadow: none;
+  --ag-icon-font-code-checkbox-checked: "radio-button-on";
+  --ag-icon-font-code-checkbox-unchecked: "radio-button-off";
+  --ag-checkbox-background-color: none;
+  --ag-icon-font-code-desc: "small-down";
+  --ag-icon-font-code-asc: "small-up";
+  --ag-foreground-color: rgb(0, 0, 0);
+  --ag-header-height: 42px !important;
+}
+.ag-theme-alpine .ag-root-wrapper {
+  border: none;
+  border-top: 1px solid rgb(0, 0, 0);
+  cursor: pointer;
+}
+.ag-theme-alpine .ag-cell-focus,
+.ag-theme-alpine .ag-cell-no-focus {
+  border: none !important;
+}
+
+.ag-theme-alpine .ag-header-cell-label {
+  justify-content: center;
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+}
+
+.ag-theme-alpine .ag-checkbox-input {
+  cursor: pointer;
+}

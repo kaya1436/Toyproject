@@ -1,5 +1,5 @@
 import { Oval } from "react-loader-spinner";
-import { LoadingDiv } from "../components/table/GridStyle";
+import { LoadingDiv } from "./table/GridStyle";
 
 export default function Loading() {
   return (

@@ -9,16 +9,16 @@ import {
   vinState,
 } from "../../atom";
 import { MultiSelect } from "./MultiSelect";
-import { Input, Label, LabelTd, SearchTd } from "./searchTableStyle";
+import { Input, Label, SearchLabelTd, SearchTd } from "./searchTableStyle";
 
 //vehicle page
 export const VinInput = () => {
   const [vin, setVin] = useRecoilState(vinState);
   return (
     <>
-      <LabelTd>
+      <SearchLabelTd>
         <Label htmlFor="vin">{t("VIN No.")}</Label>
-      </LabelTd>
+      </SearchLabelTd>
       <SearchTd>
         <Input
           placeholder={t("Enter details")}
@@ -34,9 +34,9 @@ export const VehicleNumberInput = () => {
   const [vehicleNumber, setVehicleNumber] = useRecoilState(vehicleNumberState);
   return (
     <>
-      <LabelTd>
+      <SearchLabelTd>
         <Label htmlFor="license_plate_number">{t("Vehicle No.")}</Label>
-      </LabelTd>
+      </SearchLabelTd>
       <SearchTd>
         <Input
           placeholder={t("Enter details")}
@@ -52,9 +52,9 @@ export const ContractorInput = () => {
   const [contractor, setContractor] = useRecoilState(contractorState);
   return (
     <>
-      <LabelTd>
+      <SearchLabelTd>
         <Label htmlFor="계약자명">{t("Contractor Name")}</Label>
-      </LabelTd>
+      </SearchLabelTd>
       <SearchTd>
         <Input
           placeholder={t("Enter details")}
@@ -76,9 +76,9 @@ export const MultiInput = () => {
   ];
   return (
     <>
-      <LabelTd>
+      <SearchLabelTd>
         <Label htmlFor="product_name">{t("E-mobility Subs.Plan")}</Label>
-      </LabelTd>
+      </SearchLabelTd>
       <SearchTd>
         <MultiSelect
           options={options}
@@ -95,9 +95,9 @@ export const VehicleNameInput = () => {
   const [vehicleName, setVehicleName] = useRecoilState(vehicleNameState);
   return (
     <>
-      <LabelTd>
+      <SearchLabelTd>
         <Label htmlFor="vehicle_name">모델명</Label>
-      </LabelTd>
+      </SearchLabelTd>
       <SearchTd>
         <Input
           placeholder="내용을 입력하세요."
@@ -117,9 +117,9 @@ export const BrandInput = () => {
   ];
   return (
     <>
-      <LabelTd>
+      <SearchLabelTd>
         <Label htmlFor="brand">제조사</Label>
-      </LabelTd>
+      </SearchLabelTd>
       <SearchTd>
         <MultiSelect options={options} value={brand} onChange={setBrand} />
       </SearchTd>

@@ -1,5 +1,9 @@
+:root {
+  --toastify-color-success: rgb(37, 172, 204);
+  --toastify-icon-color-success: var(--toastify-color-success);
+}
 .toast {
-  top: 7rem !important;
+  top: 15rem !important;
 }
 
 .Toastify__toast-container--top-center .Toastify__toast-body {

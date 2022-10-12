@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import blankImg from "../../assets/img/photo-f.svg";
 
 export const ContentBox = styled.div`
   width: 100%;
@@ -12,10 +11,6 @@ export const ContentTitle = styled.div`
   font-size: 26px;
   font-weight: 500;
   margin-bottom: 24px;
-`;
-
-export const Form = styled.form`
-  display: block;
 `;
 
 export const FormButton = styled.button`
@@ -48,6 +43,12 @@ export const ColorButton = styled.button`
   padding-right: 16px;
   margin-left: 8px;
   margin-bottom: 12px;
+  &:disabled {
+    cursor: default;
+    background-color: rgb(195, 200, 206);
+    color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgb(180, 180, 180);
+  }
 `;
 
 export const SearchBox = styled.div`
@@ -66,7 +67,7 @@ export const SearchTable = styled.table`
   table-layout: fixed;
 `;
 
-export const LabelTd = styled.td`
+export const SearchLabelTd = styled.td`
   min-width: 100px;
   width: 200px;
   line-height: 17px;
@@ -102,18 +103,9 @@ export const Input = styled.input`
     background-color: rgb(238, 238, 238);
     color: rgb(119, 128, 139);
   }
-  &:hover {
+  &:hover:not([disabled]) {
     box-shadow: rgb(109 110 131 / 30%) 0px 0px 3px 0px;
   }
-`;
-
-export const TableDivLeft = styled.td`
-  width: 20px;
-  border-right: 1px solid rgb(235, 235, 235);
-`;
-
-export const TableDivRight = styled.td`
-  width: 20px;
 `;
 
 export const selectStyles = {
@@ -153,34 +145,3 @@ export const selectStyles = {
     "&:hover": { backgroundColor: "rgb(240, 240, 240)" },
   }),
 };
-
-export const InfoHeader = styled.div`
-  font-size: 16px;
-  width: 100%;
-  border-top: 1px solid rgb(0, 0, 0);
-  border-bottom: 1px solid rgb(225, 227, 230);
-  display: inline-block;
-`;
-
-export const InfoHeaderText = styled.div`
-  border-bottom: 2px solid rgb(32, 33, 51);
-  display: inline-block;
-  padding: 15px 15px 13px;
-  font-weight: 700;
-`;
-
-export const ImgBox = styled.div`
-  width: 100%;
-  height: 218px;
-  margin: 0px;
-  background-color: rgba(195, 200, 206, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-export const Img = styled.div`
-  background-image: url(${blankImg});
-  background-position: center;
-  display: inline-block;
-  background-repeat: no-repeat;
-`;

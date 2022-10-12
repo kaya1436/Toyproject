@@ -1,6 +1,10 @@
 import { t } from "i18next";
 import { useRecoilValue } from "recoil";
-import { vehicleModelRowState, vehicleRowState } from "../../atom";
+import {
+  vehicleDataState,
+  vehicleModelRowState,
+  vehicleRowState,
+} from "../../atom";
 import { ColorButton, FormButton } from "./searchTableStyle";
 import * as xlsx from "xlsx";
 import moment from "moment";
@@ -58,6 +62,7 @@ export const DeleteButton = () => {
 export const DownloadButton = () => {
   const excelData = useRecoilValue(vehicleRowState);
   const now = moment().format("YYYYMMDDhhmmss");
+
   const excelDownload = (e, excelData) => {
     e.preventDefault();
     if (excelData.length === 0) {
@@ -74,6 +79,18 @@ export const DownloadButton = () => {
         { wpx: 100 },
         { wpx: 100 },
       ];
+      [
+        t("Number"),
+        t("VIN No."),
+        t("Vehicle No."),
+        t("E-mobility Subs. Plan"),
+        t("Subscription Date"),
+        t("End Date"),
+        t("Current location"),
+      ].forEach((x, index) => {
+        const cellAdd = xlsx.utils.encode_cell({ c: index, r: 0 });
+        ws[cellAdd].v = x;
+      });
 
       xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
       xlsx.writeFile(wb, `Filemonitoring_vehiclelist_${now}.xlsx`);

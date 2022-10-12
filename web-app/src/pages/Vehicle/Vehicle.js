@@ -3,18 +3,14 @@ import {
   ColorButton,
   ContentBox,
   ContentTitle,
-  Form,
   FormButton,
   SearchBox,
   SearchTd,
   SearchTable,
-  TableDivLeft,
-  TableDivRight,
 } from "../../components/search/searchTableStyle";
 import { t } from "i18next";
 import GridTable from "../../components/table/GridTable";
 import {
-  DeleteButton,
   DownloadButton,
   ResetButton,
   SearchButton,
@@ -28,7 +24,6 @@ import {
   VehicleNumberInput,
   VinInput,
 } from "../../components/search/searchInputForm";
-import { vehicleColumns } from "./vehicleColumns";
 import {
   contractorState,
   multiSelectState,
@@ -37,6 +32,7 @@ import {
   vinState,
 } from "../../atom";
 import { useRecoilState } from "recoil";
+import { TableDivision } from "../../components/search/tableForm";
 
 function Vehicle() {
   const [vin, setVin] = useRecoilState(vinState);
@@ -44,6 +40,41 @@ function Vehicle() {
   const [contractor, setContractor] = useRecoilState(contractorState);
   const [multiSelect, setMultiSelect] = useRecoilState(multiSelectState);
   const [, setData] = useRecoilState(vehicleDataState);
+
+  const vehicleColumns = [
+    {
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      width: 48,
+      lockPosition: true,
+    },
+    { headerName: t("Number"), field: "name", lockPosition: true },
+    { headerName: t("VIN No."), field: "nativeName", lockPosition: true },
+    {
+      headerName: t("Vehicle No."),
+      field: "capital",
+      cellRenderer: ({ value }) => {
+        return value ? value : "-";
+      },
+      lockPosition: true,
+    },
+    {
+      headerName: t("E-mobility Subs.Plan"),
+      field: "flag",
+      cellRenderer: ({ value }) => {
+        return <img src={value} width="50" />;
+      },
+      lockPosition: true,
+    },
+    { headerName: t("Subscription Date"), field: "region", lockPosition: true },
+    { headerName: t("End Date"), field: "population", lockPosition: true },
+    {
+      headerName: t("Current location"),
+      field: "numericCode",
+      lockPosition: true,
+    },
+  ];
+
   const defaultValues = {
     vin: vin,
     license_plate_number: vehicleNumber,
@@ -63,10 +94,11 @@ function Vehicle() {
     e.preventDefault();
     console.log(defaultValues);
   };
+
   return (
     <ContentBox>
       <div>
-        <Form autoComplete="off">
+        <form autoComplete="off">
           <ContentTitle>{t("Vehicle Info.")}</ContentTitle>
           <Link to="/vehicle/create">
             <ColorButton>{t("Register")}</ColorButton>
@@ -81,8 +113,7 @@ function Vehicle() {
               <tbody>
                 <tr>
                   <VinInput />
-                  <TableDivLeft rowSpan="2" />
-                  <TableDivRight rowSpan="2" />
+                  <TableDivision num="2" />
                   <VehicleNumberInput />
                 </tr>
                 <tr>
@@ -98,7 +129,7 @@ function Vehicle() {
               </tbody>
             </SearchTable>
           </SearchBox>
-        </Form>
+        </form>
       </div>
       <div>
         <GridTable

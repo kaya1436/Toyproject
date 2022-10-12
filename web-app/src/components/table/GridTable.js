@@ -9,7 +9,7 @@ import { useMemo, useState } from "react";
 import { GridPagination, GridTotalRow } from "./GridPagination";
 import { t } from "i18next";
 import { GridPageFilter } from "./GridPageFilter";
-import Loading from "../../pages/Loading";
+import Loading from "../Loading";
 import "../../css/gridTable.css";
 
 const GridTable = ({ textFilter, getApi, column, setData }) => {

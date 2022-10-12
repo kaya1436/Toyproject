@@ -38,10 +38,9 @@
   "Date of birth": "생년월일",
   "Sign up": "회원가입",
   "Number": "번호",
-  "VIN No.": "VIN No.",
-  "Vehicle No.": "차량번호",
   "E-mobility Subs. Plan": "E-mobility 요금제",
   "Subscription Date": "가입일",
   "End Date": "종료일",
-  "Current location": "현재위치"
+  "Current location": "현재위치",
+  "Vehicle Model": "차량모델"
 }

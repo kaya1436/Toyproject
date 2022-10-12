@@ -1,38 +1,38 @@
 .ag-theme-material {
+  font-family: "Noto Sans KR", sans-serif !important;
   font-size: 14px;
-  font-family: "Noto Sans KR", sans-serif;
   text-align: center;
-  --ag-foreground-color: rgb(0, 0, 0);
-  --ag-selected-row-background-color: transparent;
-  --ag-checkbox-unchecked-color: rgb(150, 150, 150);
-  --ag-header-cell-hover-background-color: rgb(250, 250, 250);
+  --ag-selected-row-background-color: none !important;
+  --ag-row-hover-color: rgb(160, 160, 160, 0.2) !important;
+  --ag-header-cell-hover-background-color: rgb(250, 250, 250) !important;
+  --ag-checkbox-background-color: rgb(255, 255, 255) !important;
+  --ag-checkbox-unchecked-color: rgb(140, 140, 140) !important;
 }
 .ag-theme-material .ag-root-wrapper {
+  border: none;
   border-top: 1px solid rgb(0, 0, 0);
 }
-.ag-header-cell {
+.ag-theme-material .ag-header-cell {
   background-color: rgb(250, 250, 250);
 }
 
-.ag-header-cell-label {
+.ag-theme-material .ag-header-cell-label {
   justify-content: center;
   font-size: 14px;
   color: rgb(0, 0, 0);
 }
-.ag-row {
-  cursor: pointer;
-}
-.ag-checkbox-input {
-  cursor: pointer;
-}
-.ag-checkbox-input-wrapper.ag-checked::after {
-  color: rgb(0, 0, 0) !important;
-}
-.ag-cell-focus,
-.ag-cell-no-focus {
-  border: none !important;
-}
 .ag-theme-material .ag-header-row {
   height: 45px;
   min-height: 45px;
+}
+.ag-theme-material .ag-row {
+  cursor: pointer;
+}
+.ag-theme-material .ag-checkbox-input {
+  cursor: pointer;
+}
+
+.ag-theme-material .ag-cell-focus,
+.ag-theme-material .ag-cell-no-focus {
+  border: none !important;
 }

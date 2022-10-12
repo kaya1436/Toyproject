@@ -7,7 +7,7 @@ import Layout from "./components/header/Layout";
 import VehicleModel from "./pages/VehicleModel/VehicleModel";
 import Product from "./pages/Product";
 import SubscriptionUser from "./pages/SubscriptionUser";
-import VehicleCreate from "./pages/VehicleCreate";
+import VehicleCreate from "./pages/VehicleCreate/VehicleCreate";
 
 function App() {
   return (

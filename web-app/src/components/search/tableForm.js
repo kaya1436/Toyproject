@@ -1,14 +1,14 @@
 import {
+  CreateLabelTd,
   InfoHeader,
   InfoHeaderText,
+} from "../createTableStyles";
+import {
   Input,
   Label,
-  LabelTd,
   SearchBox,
   SearchTable,
   SearchTd,
-  TableDivLeft,
-  TableDivRight,
 } from "./searchTableStyle";
 
 export const VehicleInfoTable = ({ title, table }) => {
@@ -24,17 +24,24 @@ export const VehicleInfoTable = ({ title, table }) => {
   );
 };
 
-export const TableLabel = ({ label, placeholder, disabled, readonly }) => {
+export const TableLabel = ({
+  label,
+  placeholder,
+  disabled,
+  readonly,
+  value,
+}) => {
   return (
     <>
-      <LabelTd>
+      <CreateLabelTd>
         <Label>{label}</Label>
-      </LabelTd>
+      </CreateLabelTd>
       <SearchTd>
         <Input
           placeholder={placeholder}
           disabled={disabled}
           readOnly={readonly}
+          value={value}
         ></Input>
       </SearchTd>
     </>
@@ -44,8 +51,11 @@ export const TableLabel = ({ label, placeholder, disabled, readonly }) => {
 export const TableDivision = ({ num }) => {
   return (
     <>
-      <TableDivLeft rowSpan={num} />
-      <TableDivRight rowSpan={num} />
+      <td
+        rowSpan={num}
+        style={{ width: "20px", borderRight: "1px solid rgb(235, 235, 235)" }}
+      />
+      <td rowSpan={num} style={{ width: "20px" }} />
     </>
   );
 };
