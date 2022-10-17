@@ -1,20 +1,19 @@
-import {
-  CreateLabelTd,
-  ErrorMessage,
-  ImgBox,
-} from "../../../components/createTableStyles";
+import { CreateLabelTd, ImgBox } from "../../components/createTableStyles";
 import {
   Input,
   Label,
   SearchTd,
-} from "../../../components/search/searchTableStyle";
+} from "../../components/search/searchTableStyle";
 import {
   TableDivision,
   TableLabel,
   VehicleInfoTable,
-} from "../../../components/search/tableForm";
-import { LicenseNumberDoubleCheck, VinNoDoubleCheck } from "./DoubleCheck";
-import blankImg from "../../../assets/img/photo-f.svg";
+} from "../../components/search/tableForm";
+import {
+  LicenseNumberDoubleCheck,
+  VinNoDoubleCheck,
+} from "./components/VehicleCreateInfo/DoubleCheck";
+import blankImg from "../../assets/img/photo-f.svg";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   batterySerialState,
@@ -28,8 +27,8 @@ import {
   modelYearState,
   outPutState,
   transmissionState,
-} from "../../../atom";
-import { SelectVehicleModal } from "./SelectVehicleModal";
+} from "../../atom";
+import { SelectVehicleModal } from "./components/VehicleCreateInfo/SelectVehicleModal";
 
 export const VehicleInfo = () => {
   const [batterySerial, setBatterySerial] = useRecoilState(batterySerialState);

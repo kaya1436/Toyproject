@@ -2,15 +2,15 @@ import { AgGridReact } from "ag-grid-react";
 import axios from "axios";
 import { t } from "i18next";
 import { useMemo, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { nameState, vehicleDataState } from "../../../atom";
-import Loading from "../../../components/Loading";
-import NoRowsOverlay from "../../../components/NoRowsOverlay";
-import { Input } from "../../../components/search/searchTableStyle";
+import { useRecoilState } from "recoil";
+import { vehicleDataState } from "../../../../atom";
+import Loading from "../../../../components/Loading";
+import NoRowsOverlay from "../../../../components/NoRowsOverlay";
+import { Input } from "../../../../components/search/searchTableStyle";
 
 export const VehicleSelectTable = () => {
   const [gridApi, setGridApi] = useState();
-  const [data, setData] = useRecoilState(vehicleDataState);
+  const [, setData] = useRecoilState(vehicleDataState);
   const columns = [
     {
       headerName: t("Vehicle Model"),

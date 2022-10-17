@@ -1,12 +1,11 @@
-import logo_e from "../assets/img/logo_emobility.webp";
-import "../css/signup.css";
+import logo_e from "../../assets/img/logo_emobility.webp";
+import "../../css/signup.css";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { t } from "i18next";
-import { DatePicker } from "antd";
-import ko from "antd/es/date-picker/locale/ko_KR";
-import moment from "moment";
-import "moment/locale/ko";
+import { toast } from "react-toastify";
+import { PopUp } from "../../components/search/PopUp";
+import { BirthLengthPop, WriteBirthPop, WriteNamePop } from "./registerPop";
 
 function Register() {
   const [name, setName] = useState("");
@@ -14,7 +13,6 @@ function Register() {
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
   const fileInputRef = useRef("");
-  const lang = localStorage.getItem("language");
 
   useEffect(() => {
     if (image) {
@@ -35,20 +33,27 @@ function Register() {
       setImage(null);
     }
   };
-
-  const signUp = async () => {
-    const formData = new FormData();
-    formData.append("my_image", image);
-    formData.append("name", name);
-    formData.append("birth_data", birth);
-    try {
-      await axios.post("api주소", formData);
-    } catch (error) {
-      console.log(error);
-    }
+  const numInput = (e) => {
+    setBirth(e.target.value.slice(0, 8));
   };
-  const updateDate = (value, dateString) => {
-    setBirth(dateString);
+  const signUp = async () => {
+    if (name === "") {
+      toast.error(<WriteNamePop />);
+    } else if (birth === "") {
+      toast.error(<WriteBirthPop />);
+    } else if (birth.length != 8) {
+      toast.error(<BirthLengthPop />);
+    } else {
+      const formData = new FormData();
+      formData.append("my_image", image);
+      formData.append("name", name);
+      formData.append("birth_data", birth);
+      try {
+        await axios.post("api주소", formData);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -97,13 +102,18 @@ function Register() {
           </label>
           <label htmlFor="date">
             {t("Date of birth")}
-            <DatePicker
-              onChange={updateDate}
-              placeholder={t("Date of birth")}
-              locale={lang === "ko" ? ko : null}
-              showToday={false}
+            <input
+              className="info-input"
+              type="number"
+              value={birth}
+              onChange={numInput}
+              placeholder={t("Birth placeholder")}
+              maxLength="8"
+              required
+              autoComplete="off"
             />
           </label>
+          <PopUp />
           <button className="go-to" onClick={signUp}>
             {t("Sign up")}
           </button>

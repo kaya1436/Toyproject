@@ -2,6 +2,7 @@ import { t } from "i18next";
 import { useRecoilState } from "recoil";
 import {
   brandState,
+  contractorNameState,
   contractorState,
   multiSelectState,
   vehicleNameState,
@@ -49,7 +50,7 @@ export const VehicleNumberInput = () => {
 };
 
 export const ContractorInput = () => {
-  const [contractor, setContractor] = useRecoilState(contractorState);
+  const [contractor, setContractor] = useRecoilState(contractorNameState);
   return (
     <>
       <SearchLabelTd>

@@ -1,7 +1,7 @@
 import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
+import Register from "./pages/Register/Register";
 import Vehicle from "./pages/Vehicle/Vehicle";
 import Layout from "./components/header/Layout";
 import VehicleModel from "./pages/VehicleModel/VehicleModel";

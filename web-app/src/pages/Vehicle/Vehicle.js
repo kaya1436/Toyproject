@@ -25,7 +25,7 @@ import {
   VinInput,
 } from "../../components/search/searchInputForm";
 import {
-  contractorState,
+  contractorNameState,
   multiSelectState,
   vehicleDataState,
   vehicleNumberState,
@@ -37,7 +37,7 @@ import { TableDivision } from "../../components/search/tableForm";
 function Vehicle() {
   const [vin, setVin] = useRecoilState(vinState);
   const [vehicleNumber, setVehicleNumber] = useRecoilState(vehicleNumberState);
-  const [contractor, setContractor] = useRecoilState(contractorState);
+  const [contractor, setContractor] = useRecoilState(contractorNameState);
   const [multiSelect, setMultiSelect] = useRecoilState(multiSelectState);
   const [, setData] = useRecoilState(vehicleDataState);
 

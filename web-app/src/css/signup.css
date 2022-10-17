@@ -64,26 +64,9 @@
   outline: none;
   border-bottom: 2px solid rgb(37, 172, 204);
 }
-.ant-picker {
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid rgb(200, 200, 200);
-  margin-top: 5px;
-  padding-left: 1px;
-  color: rgb(0, 0, 0);
-  transition: none;
-}
-.ant-picker:hover {
-  border-bottom: 2px solid rgb(200, 200, 200);
-}
-.ant-picker-focused {
-  border: none;
-  border-bottom: 2px solid rgb(37, 172, 204);
-  box-shadow: none;
-}
-.ant-picker-input:focus {
-  border-bottom: 2px solid rgb(37, 172, 204);
-}
-.ant-picker-input > input::placeholder {
-  color: rgb(130, 130, 130);
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

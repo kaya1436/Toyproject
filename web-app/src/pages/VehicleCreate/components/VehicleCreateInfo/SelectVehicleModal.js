@@ -3,7 +3,7 @@ import {
   ColorButton,
   FormButton,
   Input,
-} from "../../../components/search/searchTableStyle";
+} from "../../../../components/search/searchTableStyle";
 import Modal from "react-modal";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -16,7 +16,7 @@ import {
   outPutState,
   transmissionState,
   vehicleNameState,
-} from "../../../atom";
+} from "../../../../atom";
 import { VehicleSelectTable } from "./VehicleSelectTable";
 
 export const SelectVehicleModal = () => {
@@ -70,7 +70,7 @@ export const SelectVehicleModal = () => {
 
   return (
     <>
-      <Input placeholder="차량모델" value={name} disabled></Input>
+      <Input placeholder="차량모델" value={name} disabled />
       <ColorButton
         style={{ minWidth: "100px", marginBottom: "0px" }}
         onClick={openModal}

@@ -13,8 +13,8 @@ export const vehicleNumberState = atom({
   key: "vehicleNumberState",
   default: "",
 });
-export const contractorState = atom({
-  key: "contractorState",
+export const contractorNameState = atom({
+  key: "contractorNameState",
   default: "",
 });
 export const multiSelectState = atom({
@@ -133,5 +133,47 @@ export const modelSelectState = selector({
     const grade = selectRow.map((value) => value.grade);
     const brand = selectRow.map((value) => value.brand);
     return { name, battery, output, image, fuel, transmission, grade, brand };
+  },
+});
+
+//contractor data
+export const contractorDataState = atom({
+  key: "contractorDateState",
+  default: [],
+});
+export const contractorIdState = atom({
+  key: "contractorIdState",
+  default: "",
+});
+export const mobileNumberState = atom({
+  key: "mobileNumberState",
+  default: "",
+});
+export const individualState = atom({
+  key: "individualState",
+  default: "",
+});
+export const birthDateState = atom({
+  key: "birthDateState",
+  default: "",
+});
+
+export const contractorSelectState = selector({
+  key: "constractorSelectState",
+  get: ({ get }) => {
+    const data = get(contractorDataState);
+    const selectRow = data.map((value) => ({
+      contractorId: value.country,
+      contractorName: value.athlete,
+      phoneNumber: value.year,
+      individual: value.sport,
+      birthDate: value.date,
+    }));
+    const id = selectRow.map((value) => value.contractorId);
+    const name = selectRow.map((value) => value.contractorName);
+    const phone = selectRow.map((value) => value.phoneNumber);
+    const individual = selectRow.map((value) => value.individual);
+    const birth = selectRow.map((value) => value.birthDate);
+    return { id, name, phone, individual, birth };
   },
 });

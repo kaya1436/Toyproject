@@ -2,11 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
-import { licenseNumberState, vinState } from "../../../atom";
+import { licenseNumberState, vinState } from "../../../../atom";
 import {
   ColorButton,
   Input,
-} from "../../../components/search/searchTableStyle";
+} from "../../../../components/search/searchTableStyle";
 import {
   LicenseCheckErrorPop,
   LicenseNotInputErrorPop,
@@ -14,7 +14,7 @@ import {
   VinCheckErrorPop,
   VinNotInputErrorPop,
   VinSuccessPop,
-} from "./PopUp";
+} from "../PopUp";
 
 export const LicenseNumberDoubleCheck = () => {
   const [licenseNumber, setLicenseNumber] = useRecoilState(licenseNumberState);
