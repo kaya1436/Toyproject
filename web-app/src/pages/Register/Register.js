@@ -12,6 +12,8 @@ function Register() {
   const [birth, setBirth] = useState("");
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
+  const [check, setCheck] = useState(false);
+
   const fileInputRef = useRef("");
 
   useEffect(() => {
@@ -33,15 +35,26 @@ function Register() {
       setImage(null);
     }
   };
-  const numInput = (e) => {
-    setBirth(e.target.value.slice(0, 8));
+  const birthCheck = (e) => {
+    const birth = e.target.value.slice(0, 8);
+    setBirth(birth);
+    const birthPattern =
+      /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+    if (!birthPattern.test(birth)) {
+      setCheck(false);
+    } else {
+      setCheck(true);
+    }
   };
+  console.log(check);
   const signUp = async () => {
     if (name === "") {
       toast.error(<WriteNamePop />);
     } else if (birth === "") {
       toast.error(<WriteBirthPop />);
     } else if (birth.length != 8) {
+      toast.error(<BirthLengthPop />);
+    } else if (check === false) {
       toast.error(<BirthLengthPop />);
     } else {
       const formData = new FormData();
@@ -55,7 +68,6 @@ function Register() {
       }
     }
   };
-
   return (
     <div className="login-bg">
       <div className="box">
@@ -106,7 +118,7 @@ function Register() {
               className="info-input"
               type="number"
               value={birth}
-              onChange={numInput}
+              onChange={birthCheck}
               placeholder={t("Birth placeholder")}
               maxLength="8"
               required

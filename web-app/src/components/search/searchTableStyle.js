@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import errorIcon from "../../assets/img/warning-line.svg";
 
 export const ContentBox = styled.div`
   width: 100%;
@@ -105,6 +106,13 @@ export const Input = styled.input`
   }
   &:hover:not([disabled]) {
     box-shadow: rgb(109 110 131 / 30%) 0px 0px 3px 0px;
+  }
+  &.is-invalid {
+    border: 1px solid rgb(230, 72, 72);
+    background-image: url(${errorIcon});
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: right 8px center;
   }
 `;
 

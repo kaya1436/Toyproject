@@ -1,4 +1,8 @@
-import { CreateLabelTd, ImgBox } from "../../components/createTableStyles";
+import {
+  CreateLabelTd,
+  ErrorMessage,
+  ImgBox,
+} from "../../components/createTableStyles";
 import {
   Input,
   Label,
@@ -14,33 +18,23 @@ import {
   VinNoDoubleCheck,
 } from "./components/VehicleCreateInfo/DoubleCheck";
 import blankImg from "../../assets/img/photo-f.svg";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import {
-  batterySerialState,
   batteryState,
   brandState,
-  colorState,
-  deviceSerialState,
-  fuelState,
   gradeState,
   imageState,
-  modelYearState,
   outPutState,
   transmissionState,
 } from "../../atom";
 import { SelectVehicleModal } from "./components/VehicleCreateInfo/SelectVehicleModal";
 
-export const VehicleInfo = () => {
-  const [batterySerial, setBatterySerial] = useRecoilState(batterySerialState);
-  const [deviceSerial, setDivceSerial] = useRecoilState(deviceSerialState);
-  const [year, setYear] = useRecoilState(modelYearState);
+export const VehicleInfo = ({ register, errors, getValues }) => {
   const battery = useRecoilValue(batteryState);
   const output = useRecoilValue(outPutState);
   const image = useRecoilValue(imageState);
-  const fuel = useRecoilValue(fuelState);
   const transmission = useRecoilValue(transmissionState);
   const grade = useRecoilValue(gradeState);
-  const [color, setColor] = useRecoilState(colorState);
   const brand = useRecoilValue(brandState);
 
   return (
@@ -54,8 +48,15 @@ export const VehicleInfo = () => {
             </CreateLabelTd>
             <SearchTd>
               <div style={{ display: "flex" }}>
-                <LicenseNumberDoubleCheck />
+                <LicenseNumberDoubleCheck
+                  register={register}
+                  errors={errors}
+                  getValues={getValues}
+                />
               </div>
+              {errors?.license_plate_number?.type === "required" && (
+                <ErrorMessage>차량 번호 중복 확인을 해주세요.</ErrorMessage>
+              )}
             </SearchTd>
             <TableDivision num="9" />
             <CreateLabelTd>
@@ -93,11 +94,10 @@ export const VehicleInfo = () => {
             </CreateLabelTd>
             <SearchTd>
               <Input
+                {...register("battery_serial_number")}
                 placeholder="배터리고유번호"
-                value={batterySerial}
-                onChange={(e) => setBatterySerial(e.target.value)}
                 maxLength="20"
-              ></Input>
+              />
             </SearchTd>
           </tr>
           <tr>
@@ -106,11 +106,10 @@ export const VehicleInfo = () => {
             </CreateLabelTd>
             <SearchTd>
               <Input
+                {...register("device_serial_number")}
                 placeholder="단말기S/N를 입력해주세요"
-                value={deviceSerial}
-                onChange={(e) => setDivceSerial(e.target.value)}
                 maxLength="20"
-              ></Input>
+              />
             </SearchTd>
           </tr>
           <tr>
@@ -129,19 +128,23 @@ export const VehicleInfo = () => {
             </CreateLabelTd>
             <SearchTd>
               <Input
+                {...register("model_year")}
                 placeholder="연식을 입력하세요"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
                 maxLength="4"
-              ></Input>
+              />
             </SearchTd>
-            <TableLabel
-              label="연료타입"
-              placeholder="연료타입"
-              value={fuel}
-              readonly
-              disabled
-            />
+            <CreateLabelTd>
+              <Label>연료타입</Label>
+            </CreateLabelTd>
+            <SearchTd>
+              <Input
+                {...register("fuel_type")}
+                placeholder="연료타입"
+                maxLength="4"
+                disabled
+                readOnly
+              />
+            </SearchTd>
           </tr>
           <tr>
             <TableLabel
@@ -180,11 +183,7 @@ export const VehicleInfo = () => {
               <Label>외색*</Label>
             </CreateLabelTd>
             <SearchTd>
-              <Input
-                placeholder="외색을 입력하세요"
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
-              />
+              <Input {...register("color")} placeholder="외색을 입력하세요" />
             </SearchTd>
             <TableLabel
               label="제조사"

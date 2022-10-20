@@ -32,6 +32,7 @@ const GridTable = ({ textFilter, getApi, column, setData }) => {
     params.api.sizeColumnsToFit();
     setData([]);
   };
+
   const onGridSizeChanged = () => {
     gridApi.api.sizeColumnsToFit();
   };
@@ -77,6 +78,9 @@ const GridTable = ({ textFilter, getApi, column, setData }) => {
   const loadingOverlayComponent = useMemo(() => {
     return Loading;
   }, []);
+  const onCellClicked = () => {
+    alert("click");
+  };
 
   return (
     <>
@@ -115,6 +119,7 @@ const GridTable = ({ textFilter, getApi, column, setData }) => {
           suppressRowClickSelection={true}
           onGridSizeChanged={onGridSizeChanged}
           rowHeight={45}
+          onCellClicked={onCellClicked}
         />
       </div>
       <div>

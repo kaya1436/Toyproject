@@ -49,7 +49,7 @@ export const EMobilitySubInfo = () => {
   };
 
   const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState("");
+  const [endDate, setEndDate] = useState(null);
   const calendar = useRef(null);
   const closeDatePicker = () => {
     setStartDate(startDate);

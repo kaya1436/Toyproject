@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRecoilState } from "recoil";
-import { licenseNumberState, vinState } from "../../../../atom";
+import { licenseDisabledState, vinState } from "../../../../atom";
 import {
   ColorButton,
   Input,
@@ -16,9 +16,9 @@ import {
   VinSuccessPop,
 } from "../PopUp";
 
-export const LicenseNumberDoubleCheck = () => {
-  const [licenseNumber, setLicenseNumber] = useRecoilState(licenseNumberState);
-  const [disabled, setDisabled] = useState(false);
+export const LicenseNumberDoubleCheck = ({ register, errors, getValues }) => {
+  const licenseNumber = getValues("license_plate_number");
+  const [disabled, setDisabled] = useRecoilState(licenseDisabledState);
   const licenseNumDoubleCheck = async (licenseNumber) => {
     let boolean_value;
     await axios
@@ -28,7 +28,7 @@ export const LicenseNumberDoubleCheck = () => {
       })
       .catch((error) => {
         console.log(error);
-        boolean_value = true;
+        boolean_value = false;
       });
     return boolean_value;
   };
@@ -42,22 +42,18 @@ export const LicenseNumberDoubleCheck = () => {
         setDisabled(true);
       } else {
         toast.error(<LicenseCheckErrorPop />);
-        setLicenseNumber("");
       }
     });
   };
-  const licenseNumberInput = (e) => {
-    setLicenseNumber(e.target.value);
-    setDisabled(false);
-  };
+
   return (
     <>
       <Input
+        {...register("license_plate_number", { required: true })}
         placeholder="차량번호"
-        value={licenseNumber}
-        onChange={licenseNumberInput}
         maxLength="12"
-      ></Input>
+        className={errors.license_plate_number ? "is-invalid" : ""}
+      />
       <ColorButton
         style={{ minWidth: "100px", marginBottom: "0px" }}
         onClick={doubleCheck}

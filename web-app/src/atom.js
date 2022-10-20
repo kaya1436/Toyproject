@@ -69,14 +69,7 @@ export const licenseNumberState = atom({
   key: "licenseNumberState",
   default: "",
 });
-export const batterySerialState = atom({
-  key: "batterySerialState",
-  default: "",
-});
-export const deviceSerialState = atom({
-  key: "deviceSerialState",
-  default: "",
-});
+
 export const modelYearState = atom({
   key: "modelYearState",
   default: "",
@@ -105,10 +98,6 @@ export const gradeState = atom({
   key: "gradeState",
   default: "",
 });
-export const colorState = atom({
-  key: "colorState",
-  default: "",
-});
 
 export const modelSelectState = selector({
   key: "modelSelectState",
@@ -134,6 +123,15 @@ export const modelSelectState = selector({
     const brand = selectRow.map((value) => value.brand);
     return { name, battery, output, image, fuel, transmission, grade, brand };
   },
+});
+
+export const licenseDisabledState = atom({
+  key: "licenseDisabledState",
+  default: false,
+});
+export const vinDisabledState = atom({
+  key: "vinDisabledState",
+  default: false,
 });
 
 //contractor data
